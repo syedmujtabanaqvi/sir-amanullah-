@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amanullah | MMA Trainer</title>
+  <style>
+    /* ---------- GLOBAL STYLES ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #0b0b0b;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #ff1e1e;
+      text-decoration: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: #111;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 2px solid #ff1e1e;
+    }
+
+    header h1 {
+      font-size: 26px;
+      background: linear-gradient(45deg, #ff1e1e, #b30000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 25px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #000, #420000);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      background: linear-gradient(45deg, #ff1e1e, #ff5959);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 22px;
+      color: #ccc;
+      margin: 15px 0 30px;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ff1e1e, #b30000);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #b30000, #ff1e1e);
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section {
+      padding: 80px 50px;
+      /* max-width: 1100px; */
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      background: linear-gradient(45deg, #ff1e1e, #b30000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 40px;
+    }
+
+    .about p {
+      text-align: left;
+      font-size: 18px;
+      color: #ccc;
+      max-width: 800px;
+      margin: auto;
+      align-items: center;
+    }
+
+    /* ---------- ACHIEVEMENTS ---------- */
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .achievement {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 10px;
+      border-left: 4px solid #ff1e1e;
+      transition: 0.3s;
+    }
+
+    .achievement:hover {
+      transform: translateY(-5px);
+    }
+
+    .achievement h3 {
+      color: #ff4c4c;
+      margin-bottom: 10px;
+    }
+
+    /* ---------- FIGHTS SECTION ---------- */
+    .fights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .fight {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .fight img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .fight-info {
+      padding: 20px;
+    }
+
+    .fight-info h3 {
+      color: #ff4c4c;
+    }
+
+    /* ---------- TROPHIES GALLERY ---------- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ---------- CONTACT ---------- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #222;
+      color: #fff;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff1e1e, #b30000);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #b30000, #ff1e1e);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #111;
+      color: #aaa;
+      border-top: 2px solid #ff1e1e;
+      margin-top: 50px;
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+    /* #flex{
+       
+    } */
+    #about{
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+.heading{
+    margin-top: 10px;
+}
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AMANULLAH</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#fights">Fights</a>
+      <a href="#trophies">Trophies</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>AMANULLAH</h1>
+    <p>Professional MMA Trainer | Fighter | Motivator</p>
+    <a href="#contact" class="btn">Book a Training Session</a>
+  </section>
+<h2 class="heading">Introduction</h2>
+  <section id="about" class="about">
+    
+    <p>
+     Amanullah Memon is from Hijrat colony, Karachi,
+ Pakistan. When he was only 15, he started attending
+ different conferences, workshops, seminars and other
+ events that helped him learn various life skills. He
+ belongs to an underprivileged family, where his father is
+ a daily wage earner. From a very young age, he started
+ working at a local hotel to financially support his family.
+ While continuing to work, he also focused on his
+ education. During his spare time, he started to
+ participate in MMA and BJJ along with some locals of his
+ area. With time, he developed a passion for the sport and
+ decided to pursue it professionally
+    </p>
+    <div class="intro-pic">
+        <img src="pic2.png" alt="" srcset="">
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <div class="achievements">
+      <div class="achievement">
+        <h3>🥇 KCFL Karachi Champion (2019)</h3>
+        <p>  2019 title champion in KCFL Karachi cage fighting League.</p>
+      </div>
+      <div class="achievement">
+        <h3>🥇 International Fighter Recognition</h3>
+        <p>2015 bJJ Gold medal in Thailand.</p>
+      </div>
+      <div class="achievement">
+        <h3>💪 Kazakhstan</h3>
+        <p>Asian champion 2017 in BJJ gold medal champion in Kazakhstan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fights">
+    <h2>Past Fights</h2>
+    <div class="fights">
+      <div class="fight">
+        <img src="fight1.png" alt="Fight 1">
+        <div class="fight-info">
+          <h3>Amanullah vs ATIF KHAN</h3>
+          
+        </div>
+      </div>
+      <div class="fight">
+        <img src="pic11.png" alt="Fight 2">
+        <div class="fight-info">
+          <h3>SECURED BRONZE MEDAL</h3>
+          
+        </div>
+      </div>
+      <div class="fight">
+        <img src="pic10.png" alt="Fight 3">
+        <div class="fight-info">
+          <h3>AMANULLAH vs SEYED ALI</h3>
+        
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trophies">
+    <h2>Trophies & Medals</h2>
+    <div class="gallery">
+      
+      <img src="piic3.png" alt="Trophy 2">
+      <img src="pic4.png" alt="Trophy 3">
+      <img src="pic5.png" alt="Trophy 4">
+      <img src="pic7.png" alt="Trophy 5">
+      <img src="image8.png" alt="Trophy 6">
+      
+      
+     
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Amanullah</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Amanullah MMA. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
