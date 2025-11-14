@@ -281,6 +281,25 @@
         padding: 60px 20px;
       }
     }
+    /* CSS */
+.responsive-img {
+    width: 80%;      /* default mobile-friendly */
+    max-width: 300px;  /* mobile pe max size */
+    height: auto;
+    border: 2px solid #000;
+    display: block;
+    margin: 0 auto;    /* center alignment */
+}
+
+/* Desktop ke liye */
+@media (min-width: 1024px) {
+    .responsive-img {
+     
+        max-width: 400px;  /* desktop pe badi image */
+    }
+}
+
+
   </style>
 </head>
 <body>
@@ -303,20 +322,8 @@
 <h2 class="heading">Introduction</h2>
   <section id="about" class="about">
     
-    <p>
-     Amanullah Memon is from Hijrat colony, Karachi,
- Pakistan. When he was only 15, he started attending
- different conferences, workshops, seminars and other
- events that helped him learn various life skills. He
- belongs to an underprivileged family, where his father is
- a daily wage earner. From a very young age, he started
- working at a local hotel to financially support his family.
- While continuing to work, he also focused on his
- education. During his spare time, he started to
- participate in MMA and BJJ along with some locals of his
- area. With time, he developed a passion for the sport and
- decided to pursue it professionally
-    </p>
+    <p >
+  Hailing from Hijrat Colony, Karachi, Amanullah Memon is a highly accomplished Pakistani MMA fighter and coach. Despite starting work at a young age to support his family, he relentlessly pursued his passion for martial arts. His hard work paid off, making him the first fighter from Karachi to win an MMA title in Islamabad, securing a Gold Medal at the Thailand World Martial Arts Summit, and earning the Asian Pacific Award. Currently, he serves as the Head Coach at 'Fighter's Den,' training the next generation of fighters, and is actively seeking sponsors to represent Pakistan on the global stage.</p>
     <div class="intro-pic">
         <img src="pic2.png" alt="" srcset="">
     </div>
@@ -381,7 +388,89 @@
      
     </div>
   </section>
+<section id="sponsorship-benefits" style="width: 100%; text-align: center;">
+        
+        <h2 style="color: #FF0000; text-transform: uppercase; font-size: 2em; margin-bottom: 40px;">
+            SPONSORSHIP BENEFITS
+        </h2>
+        
+        <div class="benefits-container" style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap;">
+            
+            <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
+                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 70px;">Entry Level 150,000</h3>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Boxing Gloves, Shin pads, Head Guard, MMA Gloves, Gum Sheild & Bandage</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Sports bag, Water Bottles with printed logo & Joggers</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">4.Pakistan Track suit</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">5.Frozen Food</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">6.Visa Fee</li>
+                </ul>
+            </div>
+            
+            <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
+                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Supporting Level 1 250,000</h3>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Boxing Gloves, Shin pads, Head Guard, MMA Gloves, Gum Sheild & Bandage</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Sports bag, Water Bottles with printed logo & Joggers</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">4.Wallet</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">5.Frozen Food</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">6.Visa Fee</li>
+                </ul>
+            </div>
+            
+            <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
+                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Supporting Level 2 500,000</h3>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Wallet</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Round Trip Ticket</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">4.Visa Fee</li>
+                </ul>
+            </div>
+              <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
+                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Supporting Level 3 600,000</h3>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Wallet</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Sports bag, Water Bottles with printed logo & Joggers</li>
+                          <li style="line-height: 1.5; margin-bottom: 8px;">4.Frozen Food</li>
+                     <li style="line-height: 1.5; margin-bottom: 8px;">5.Pakistan Track suit</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">6.Round Trip Ticket</li>
+                    <li style="line-height: 1.5; margin-bottom: 8px;">7.Visa Fee</li>
+                </ul>
+            </div>
+            <img src="pic13.png" alt="Trophy 2"class="responsive-img">
+              <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
+    <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Official Level 10,00,000</h3>
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+        <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">1. T Shirts & Shorts Printed logo</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">2. Boxing Gloves, Shin pads, Head Guard, MMA Gloves, Gum Sheild & Bandage</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">3. Sports bag, Water Bottles withprinted logo & Joggers</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">4. Visa Fee</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">5. Wallet</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">6. Round Trip Ticket</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">7. Fight Camp for one month</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">8. Hoteling for one month</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">9. Food Package for one month</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">10. Wallet for oudoor training activities</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">11. Pakistan track suit</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">12. Camp Training for 1 Month</li>
+        <li style="line-height: 1.5; margin-bottom: 8px;">13. Fight Entry Fee</li>
+    </ul>
+</div>
+<!-- HTML -->
+<img src="pic14.png" alt="Trophy 2" class="responsive-img">
 
+
+        </div>
+    </section>
 <section id="contact">
   <h2>Contact Amanullah</h2>
   <form id="web3form">
@@ -389,6 +478,8 @@
 
     <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
+    <input type="tel" name="phone" placeholder="Your Phone Number" pattern="[0-9]{10,15}" required />
+
     <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
     <button type="submit">Send Message</button>
   </form>
