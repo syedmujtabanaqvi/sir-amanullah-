@@ -232,11 +232,33 @@
     /* #flex{
        
     } */
-    #about{
-        display: flex;
-        flex-direction: row;
-        gap: 15px;
-    }
+   
+    #about {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#about p {
+    flex: 2 1 500px; /* text gets more space */
+    font-size: 18px;
+    color: #ccc;
+}
+
+.intro-pic {
+    flex: 1 1 300px; /* image takes reasonable space */
+    text-align: center;
+}
+
+.intro-pic img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 .heading{
     margin-top: 10px;
 }
@@ -360,15 +382,41 @@
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact Amanullah</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+<section id="contact">
+  <h2>Contact Amanullah</h2>
+  <form id="web3form">
+    <input type="hidden" name="access_key" value="0d61f6ff-82dd-4673-b91d-fcbef7d04473">
+
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('web3form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      alert('Message sent! Thank you, Amanullah.');
+      form.reset();
+    } catch (err) {
+      alert('Error sending message. Try again.');
+      console.error(err);
+    }
+  });
+</script>
+
 
   <footer>
     <p>© 2025 Amanullah MMA. All Rights Reserved.</p>
