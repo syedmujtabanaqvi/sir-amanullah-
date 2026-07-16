@@ -1116,6 +1116,33 @@
                 navMenu.classList.remove('active');
             });
         });
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.video-bg');
+    if (video) {
+        // Double check to ensure it is muted (Mobile rules)
+        video.muted = true;
+        
+        // Force play promise handler
+        const playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Automatic playback started!
+                console.log("Autoplay started successfully");
+            }).catch(error => {
+                // Auto-play was prevented
+                console.log("Autoplay prevented by browser, adding backup fallback trigger.");
+                
+                // User screen par kahin bhi touch kare ga to video play ho jaye gi
+                document.body.addEventListener('click', () => {
+                    video.play();
+                }, { once: true });
+            });
+        }
+    }
+});
     </script>
 </body>
 </html>
