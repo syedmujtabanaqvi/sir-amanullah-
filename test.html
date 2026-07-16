@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amanullah Memon | MMA Fighter &amp; Head Coach, Fighter's Den</title>
+    <title>Amanullah Memon | MMA Fighter & Head Coach, Fighter's Den</title>
     <style>
+        @import url('https://res.cloudinary.com/ddviuaaca/video/upload/v1784193247/Sequence_70_kmyqmv.mp4');
+
         :root {
-            --crimson: #d81f2e;
-            --crimson-dk: #7a0f18;
-            --gold: #9fb0ad;
+            --crimson: #e8323d;
+            --crimson-dk: #7d151d;
+            --gold: #c9a961;
             --bone: #f2ead9;
-            --bone-dim: #b3ac9c;
-            --line: #2e2b26;
+            --bone-dim: #b9b09a;
+            --line: #33301f;
         }
 
         * {
@@ -85,9 +87,9 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            
             backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--line);
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .header-inner {
@@ -139,31 +141,24 @@
             padding: 10px 22px;
         }
 
-        .nav-toggle {
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
             display: none;
             flex-direction: column;
-            justify-content: center;
             gap: 5px;
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: 1px solid var(--line);
             cursor: pointer;
-            padding: 0;
+            background: none;
+            border: none;
+            z-index: 60;
         }
 
-        .nav-toggle span {
+        .menu-toggle span {
             display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--bone);
-            margin: 0 auto;
-            transition: all 0.3s;
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            transition: all 0.3s ease;
         }
-
-        .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .nav-toggle.open span:nth-child(2) { opacity: 0; }
-        .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* Section Layout Config */
         section {
@@ -171,44 +166,25 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .section-title {
-            font-size: 42px;
-            font-weight: 900;
-            font-style: italic;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            border-bottom: 2px solid var(--crimson);
-            padding-bottom: 10px;
-        }
-
-        .section-title span {
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            color: var(--bone-dim);
-            letter-spacing: 2px;
-        }
-
+        /* Fixed Hero Layout for Desktop & Mobile */
         .hero-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    min-height: calc(100vh - 80px);
-    padding: 120px 0 40px 0;
-    width: 100%;
-}
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            min-height: calc(100vh - 80px);
+            padding: 60px 0;
+            width: 100%;
+        }
+
         .brand-logo-area {
             width: 100%;
             margin-bottom: 30px;
         }
 
         .logo-main {
-            font-size: clamp(55px, 8vw, 110px);
+            font-size: clamp(45px, 8vw, 110px);
             font-weight: 900;
             font-style: italic;
             color: var(--crimson);
@@ -233,7 +209,6 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
-        /* Repositioned Lower Action block */
         .hero-content {
             width: 100%;
             max-width: 750px;
@@ -270,11 +245,33 @@
             letter-spacing: 1px;
             transition: all 0.3s;
             box-shadow: 0px 5px 15px rgba(232, 50, 61, 0.4);
+            display: inline-block;
         }
 
         .btn-book:hover {
             background-color: var(--crimson-dk);
             transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid var(--crimson);
+            padding-bottom: 10px;
+        }
+
+        .section-title span {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: var(--bone-dim);
+            letter-spacing: 2px;
         }
 
         /* Tape Stats Grid Setup */
@@ -636,84 +633,155 @@
             font-size: 13px;
             color: var(--bone-dim);
             border-top: 1px solid var(--line);
-        
         }
 
-        /* Responsive Elements Handling */
+        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 980px) {
-            .container { padding: 0 24px; }
-            .header-inner { padding: 18px 24px; }
-            section { padding: 70px 0; }
-
-            .hero-section, .about-grid, .contact-grid {
-                flex-direction: column;
-                grid-template-columns: 1fr;
-                text-align: center;
-                align-items: center;
+            .container {
+                padding: 0 20px;
             }
-            .hero-section { padding: 100px 0 40px 0; }
-            .hero-content {
-                text-align: center;
-                align-items: center;
-                margin-top: 25px;
+            
+            section {
+                padding: 60px 0;
             }
-            .logo-main { text-align: center; }
-            .about-photo-frame img { height: 340px; }
-            .fights-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery { grid-template-columns: repeat(3, 1fr); }
-            .bout { grid-template-columns: 1fr; gap: 15px; }
-            .bout-price { text-align: left; }
-            .perks { grid-template-columns: 1fr; }
 
-            .section-title { font-size: 32px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            /* Responsive Navbar Header */
+            .header-inner {
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
 
             nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 9, 8, 0.95);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
-                align-items: stretch;
-                gap: 0;
-                background: rgba(10, 9, 8, 0.96);
-                border-bottom: 1px solid var(--line);
-                backdrop-filter: blur(8px);
+                justify-content: center;
+                gap: 20px;
+                transition: left 0.4s ease;
+                z-index: 55;
             }
-            nav.open { display: flex; }
-            nav a { padding: 16px 24px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-            nav a.active { clip-path: none; padding: 16px 24px; }
 
-            .nav-toggle { display: flex; }
-            .header-inner { justify-content: space-between; position: relative; }
+            nav.active {
+                left: 0;
+            }
+
+            nav a {
+                font-size: 18px;
+                width: 80%;
+                text-align: center;
+            }
+            
+            nav a.active {
+                clip-path: none;
+                background: var(--crimson);
+            }
+
+            /* Toggle Animation Effect */
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 5px);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            /* Sections Layout Modifications */
+            .hero-section {
+                padding: 40px 0;
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero-content {
+                align-items: center;
+                text-align: center;
+                border-left: none;
+                border-top: 3px solid var(--crimson);
+            }
+
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .about-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 32px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .fights-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+            }
+
+            .gallery { 
+                grid-template-columns: repeat(3, 1fr); 
+            }
+
+            .bout { 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+                padding: 20px;
+            }
+
+            .bout-order {
+                display: none;
+            }
+
+            .bout-price { 
+                text-align: left; 
+                border-top: 1px solid var(--line);
+                padding-top: 15px;
+            }
+
+            .perks { 
+                grid-template-columns: 1fr; 
+            }
         }
 
         @media (max-width: 600px) {
-            .container { padding: 0 18px; }
-            .header-inner { padding: 16px 18px; }
-            section { padding: 55px 0; }
-
-            .fights-grid, .gallery { grid-template-columns: 1fr; }
-            .tape-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .about-photo-frame img { height: 280px; }
-
-            .t-row { grid-template-columns: 1fr; gap: 10px; }
-            .t-year { font-size: 20px; }
-
-            .bout { padding: 20px; }
-            .bout-price { font-size: 26px; }
-
-            .contact-note .big { font-size: 26px; }
-            .brand { font-size: 19px; }
+            .logo-main {
+                font-size: 45px;
+            }
+            .fights-grid, .gallery { 
+                grid-template-columns: 1fr; 
+            }
+            .tape-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 15px;
+            }
+            .t-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .about-photo-frame img {
+                height: 300px;
+            }
         }
     </style>
 </head>
 <body>
 
-    
     <video class="video-bg" autoplay loop muted playsinline>
         <source src="https://res.cloudinary.com/ddviuaaca/video/upload/v1784193247/Sequence_70_kmyqmv.mp4" type="video/mp4">
-    
     </video>
     <div class="video-overlay"></div>
     <div class="bg-lines"></div>
@@ -721,7 +789,12 @@
     <header>
         <div class="header-inner">
             <div class="brand">AMAN<span>ULLAH</span> MEMON</div>
-            <nav id="mainNav">
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav-menu">
                 <a href="#about" class="active">About</a>
                 <a href="#achievements">Record</a>
                 <a href="#fights">Fights</a>
@@ -729,9 +802,6 @@
                 <a href="#sponsorship">Sponsor</a>
                 <a href="#contact">Contact</a>
             </nav>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </header>
 
@@ -868,7 +938,6 @@
             <div class="card-bill">
                 <!-- Bout 01 -->
                 <div class="bout">
-                    <div class="bout-order">01</div>
                     <div>
                         <div class="bout-round">Prelims</div>
                         <div class="bout-title"><h3>Entry Level</h3></div>
@@ -888,7 +957,6 @@
 
                 <!-- Bout 02 -->
                 <div class="bout">
-                    <div class="bout-order">02</div>
                     <div>
                         <div class="bout-round">Undercard</div>
                         <div class="bout-title"><h3>Supporting Level 1</h3></div>
@@ -908,7 +976,6 @@
 
                 <!-- Bout 03 -->
                 <div class="bout">
-                    <div class="bout-order">03</div>
                     <div>
                         <div class="bout-round">Co-Main Event</div>
                         <div class="bout-title"><h3>Supporting Level 2</h3></div>
@@ -926,7 +993,6 @@
 
                 <!-- Bout 04 -->
                 <div class="bout">
-                    <div class="bout-order">04</div>
                     <div>
                         <div class="bout-round">Main Event</div>
                         <div class="bout-title"><h3>Supporting Level 3</h3></div>
@@ -947,7 +1013,6 @@
 
                 <!-- Bout 05 -->
                 <div class="bout featured">
-                    <div class="bout-order">05</div>
                     <div>
                         <div class="bout-round">Championship Round</div>
                         <div class="bout-title"><h3>Official Level</h3></div>
@@ -1009,6 +1074,15 @@
     <footer>© 2026 Amanullah Memon MMA · All Rights Reserved</footer>
 
     <script>
+        // Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
         // Web3Form Integration Logic
         const form = document.getElementById('web3form');
         form.addEventListener('submit', async (e) => {
@@ -1030,25 +1104,17 @@
             }
         });
 
-        // Simple Nav Highlighting Tracker
+        // Simple Nav Highlighting & Mobile Menu Auto-close Tracker
         const links = document.querySelectorAll('nav a');
         links.forEach(link => {
             link.addEventListener('click', function() {
                 links.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
-                mainNav.classList.remove('open');
-                navToggle.classList.remove('open');
-                navToggle.setAttribute('aria-expanded', 'false');
+                
+                // Mobile menu close on click
+                menuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
             });
-        });
-
-        // Mobile Hamburger Menu Toggle
-        const navToggle = document.getElementById('navToggle');
-        const mainNav = document.getElementById('mainNav');
-        navToggle.addEventListener('click', () => {
-            const isOpen = mainNav.classList.toggle('open');
-            navToggle.classList.toggle('open', isOpen);
-            navToggle.setAttribute('aria-expanded', String(isOpen));
         });
     </script>
 </body>
