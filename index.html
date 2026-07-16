@@ -1,516 +1,987 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amanullah | MMA Trainer</title>
-  <style>
-    /* ---------- GLOBAL STYLES ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanullah Memon | MMA Fighter & Head Coach, Fighter's Den</title>
+    <style>
+        @import url('https://res.cloudinary.com/ddviuaaca/video/upload/v1784193247/Sequence_70_kmyqmv.mp4');
 
-    body {
-      background: #0b0b0b;
-      color: #fff;
-      line-height: 1.6;
-    }
+        :root {
+            --crimson: #e8323d;
+            --crimson-dk: #7d151d;
+            --gold: #c9a961;
+            --bone: #f2ead9;
+            --bone-dim: #b9b09a;
+            --line: #33301f;
+        }
 
-    a {
-      color: #ff1e1e;
-      text-decoration: none;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      background: #111;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 2px solid #ff1e1e;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    header h1 {
-      font-size: 26px;
-      background: linear-gradient(45deg, #ff1e1e, #b30000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-    }
+        body {
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-color: #000;
+        }
 
-    nav a {
-      margin-left: 25px;
-      font-weight: 500;
-      transition: 0.3s;
-    }
+        /* Fixed Video Background Engine */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
 
-    nav a:hover {
-      color: #fff;
-    }
+        /* Light transparent overlay to reduce heavy blackness */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10, 9, 8, 0.4) 0%, rgba(22, 20, 15, 0.65) 100%);
+            z-index: -2;
+        }
 
-    /* ---------- HERO SECTION ---------- */
-    .hero {
-      height: 100vh;
-      background: linear-gradient(135deg, #000, #420000);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-    }
+        .bg-lines {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 600px;
+            height: 400px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(232, 50, 61, 0.15) 20px,
+                rgba(232, 50, 61, 0.15) 25px
+            );
+            transform: rotate(-15deg);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    .hero h1 {
-      font-size: 60px;
-      background: linear-gradient(45deg, #ff1e1e, #ff5959);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
-    .hero p {
-      font-size: 22px;
-      color: #ccc;
-      margin: 15px 0 30px;
-    }
+        /* Header / Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line);
+        }
 
-    .btn {
-      background: linear-gradient(45deg, #ff1e1e, #b30000);
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 5px;
-      font-size: 16px;
-      transition: 0.3s;
-    }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .btn:hover {
-      background: linear-gradient(45deg, #b30000, #ff1e1e);
-    }
+        .brand {
+            font-size: 24px;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 1px;
+            color: #fff;
+        }
 
-    /* ---------- SECTIONS ---------- */
-    section {
-      padding: 80px 50px;
-      /* max-width: 1100px; */
-      margin: auto;
-    }
+        .brand span {
+            color: var(--crimson);
+        }
 
-    h2 {
-      text-align: center;
-      font-size: 36px;
-      background: linear-gradient(45deg, #ff1e1e, #b30000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 40px;
-    }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-    .about p {
-      text-align: left;
-      font-size: 18px;
-      color: #ccc;
-      max-width: 800px;
-      margin: auto;
-      align-items: center;
-    }
+        nav a {
+            text-decoration: none;
+            color: var(--bone-dim);
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
 
-    /* ---------- ACHIEVEMENTS ---------- */
-    .achievements {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
+        nav a:hover {
+            color: #fff;
+        }
 
-    .achievement {
-      background: #1a1a1a;
-      padding: 25px;
-      border-radius: 10px;
-      border-left: 4px solid #ff1e1e;
-      transition: 0.3s;
-    }
+        nav a.active {
+            background: var(--crimson);
+            color: #fff;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            padding: 10px 22px;
+        }
 
-    .achievement:hover {
-      transform: translateY(-5px);
-    }
+        /* Section Layout Config */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
 
-    .achievement h3 {
-      color: #ff4c4c;
-      margin-bottom: 10px;
-    }
+        .section-title {
+            font-size: 42px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid var(--crimson);
+            padding-bottom: 10px;
+        }
 
-    /* ---------- FIGHTS SECTION ---------- */
-    .fights {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
+        .section-title span {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: var(--bone-dim);
+            letter-spacing: 2px;
+        }
 
-    .fight {
-      background: #1a1a1a;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .fight img {
-      width: 100%;
-      height: 480px;
-      object-fit: cover;
-    }
-
-    .fight-info {
-      padding: 20px;
-    }
-
-    .fight-info h3 {
-      color: #ff4c4c;
-    }
-
-    /* ---------- TROPHIES GALLERY ---------- */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 10px;
-      transition: 0.3s;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-
-    /* ---------- CONTACT ---------- */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 500px;
-      margin: auto;
-    }
-
-    input, textarea {
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      background: #222;
-      color: #fff;
-    }
-
-    button {
-      background: linear-gradient(45deg, #ff1e1e, #b30000);
-      color: #fff;
-      border: none;
-      padding: 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: linear-gradient(45deg, #b30000, #ff1e1e);
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #111;
-      color: #aaa;
-      border-top: 2px solid #ff1e1e;
-      margin-top: 50px;
-    }
-    html{
-        scroll-behavior: smooth;
-    }
-    /* #flex{
-       
-    } */
-   
-    #about {
+        /* New Full-Width Vertical Flow Hero Layout */
+        /* .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: calc(100vh - 80px);
+            padding: 80px 0 40px 0;
+        } */
+.hero-section {
     display: flex;
-    flex-direction: row;
-    gap: 30px;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Har cheez ko left side par align karega */
+    text-align: left; /* Text alignment ko force karega */
+    min-height: calc(100vh - 80px);
+    padding: 50% 10% 40px 0;
+    width: 100%; /* Ensure karega ke container poori width le */
 }
+        .brand-logo-area {
+            width: 100%;
+            margin-bottom: 30px;
+        }
 
-#about p {
-    flex: 2 1 500px; /* text gets more space */
-    font-size: 18px;
-    color: #ccc;
-}
+        .logo-main {
+            font-size: clamp(55px, 8vw, 110px);
+            font-weight: 900;
+            font-style: italic;
+            color: var(--crimson);
+            line-height: 0.85;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
 
-.intro-pic {
-    flex: 1 1 300px; /* image takes reasonable space */
-    text-align: center;
-}
+        .logo-main span {
+            color: #fff;
+        }
 
-.intro-pic img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
-}
+        .logo-sub {
+            font-size: 15px;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bone);
+            margin-top: 15px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
 
-.heading{
-    margin-top: 10px;
-}
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
+        /* Repositioned Lower Action block */
+        .hero-content {
+            width: 100%;
+            max-width: 750px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+            background: rgba(10, 9, 8, 0.4);
+            padding: 20px;
+            border-left: 3px solid var(--crimson);
+            backdrop-filter: blur(4px);
+        }
 
-      nav {
-        margin-top: 10px;
-      }
+        .hero-tagline {
+            font-size: 16px;
+            color: var(--bone);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
 
-      .hero h1 {
-        font-size: 40px;
-      }
+        .btn-book {
+            background-color: var(--crimson);
+            color: #fff;
+            border: none;
+            padding: 14px 35px;
+            font-size: 15px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0px 5px 15px rgba(232, 50, 61, 0.4);
+        }
 
-      section {
-        padding: 60px 20px;
-      }
-    }
-    /* CSS */
-.responsive-img {
-    width: 80%;      /* default mobile-friendly */
-    max-width: 300px;  /* mobile pe max size */
-    height: auto;
-    border: 2px solid #000;
-    display: block;
-    margin: 0 auto;    /* center alignment */
-}
+        .btn-book:hover {
+            background-color: var(--crimson-dk);
+            transform: translateY(-2px);
+        }
 
-/* Desktop ke liye */
-@media (min-width: 1024px) {
-    .responsive-img {
-     
-        max-width: 400px;  /* desktop pe badi image */
-    }
-}
+        /* Tape Stats Grid Setup */
+        .tape-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 40px;
+            border-top: 1px solid var(--line);
+            padding-top: 25px;
+        }
 
+        .tape-item {
+            text-align: left;
+        }
 
-  </style>
+        .tape-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--bone-dim);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .tape-value {
+            font-size: 19px;
+            font-weight: 900;
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .tape-value em {
+            color: var(--crimson);
+            font-style: normal;
+        }
+
+        /* About Section Layout */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-photo-frame {
+            border: 1px solid var(--line);
+            padding: 15px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .about-photo-frame img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            filter: grayscale(40%);
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            color: var(--crimson);
+            margin-bottom: 15px;
+            font-style: italic;
+            text-transform: uppercase;
+        }
+
+        .about-text .lede {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .about-text p {
+            color: var(--bone-dim);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* Record Timeline Design */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .t-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            padding: 25px;
+            position: relative;
+        }
+
+        .t-year {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .t-body h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .t-body p {
+            color: var(--bone-dim);
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .t-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--crimson);
+            border: 1px solid var(--crimson);
+            padding: 4px 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Fight Log Elements */
+        .fights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .fight-card {
+            border: 1px solid var(--line);
+            background: rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .imgwrap {
+            position: relative;
+            height: 320px;
+        }
+
+        .imgwrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fight-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--crimson);
+            font-size: 11px;
+            font-weight: 900;
+            padding: 5px 10px;
+            text-transform: uppercase;
+        }
+
+        .fight-info {
+            padding: 20px;
+            font-weight: 900;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        /* Trophies Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .gallery figure {
+            border: 1px solid var(--line);
+            padding: 10px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Sponsorship Cards Layout */
+        .card-bill {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .bout {
+            display: grid;
+            grid-template-columns: 80px 1fr 220px;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--line);
+            padding: 30px;
+            align-items: start;
+        }
+
+        .bout.featured {
+            border-color: var(--gold);
+            background: linear-gradient(90deg, rgba(201, 169, 97, 0.08), transparent);
+        }
+
+        .bout-order {
+            font-size: 32px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            font-style: italic;
+        }
+
+        .bout-round {
+            font-size: 12px;
+            color: var(--crimson);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .bout.featured .bout-round {
+            color: var(--gold);
+        }
+
+        .bout-title h3 {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .tier-name {
+            font-size: 14px;
+            color: var(--bone-dim);
+            margin-bottom: 20px;
+        }
+
+        .perks {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 20px;
+            list-style: none;
+        }
+
+        .perks li {
+            font-size: 14px;
+            color: var(--bone-dim);
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .perks li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--crimson);
+        }
+
+        .bout-price {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--gold);
+            text-align: right;
+            font-style: italic;
+        }
+
+        .bout-price small {
+            display: block;
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        /* Contact Structure */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+        }
+
+        .contact-note .big {
+            font-size: 32px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .contact-note p {
+            color: var(--bone-dim);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--bone-dim);
+            letter-spacing: 1px;
+        }
+
+        input, textarea {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--line);
+            color: #fff;
+            padding: 12px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--crimson);
+            background: rgba(255,255,255,0.06);
+        }
+
+        button[type="submit"] {
+            background: var(--crimson);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--crimson-dk);
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 13px;
+            color: var(--bone-dim);
+            border-top: 1px solid var(--line);
+        
+        }
+
+        /* Responsive Elements Handling */
+        @media (max-width: 980px) {
+            .hero-section, .about-grid, .contact-grid {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+                text-align: center;
+                align-items: center;
+            }
+            .hero-content {
+                text-align: center;
+                align-items: center;
+                margin-top: 25px;
+            }
+            .logo-main { text-align: center; }
+            .fights-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery { grid-template-columns: repeat(3, 1fr); }
+            .bout { grid-template-columns: 1fr; gap: 15px; }
+            .bout-price { text-align: left; }
+            .perks { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .header-inner { justify-content: center; }
+        }
+
+        @media (max-width: 600px) {
+            .fights-grid, .gallery { grid-template-columns: 1fr; }
+            .tape-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>AMANULLAH</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#fights">Fights</a>
-      <a href="#trophies">Trophies</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
 
-  <section class="hero">
-    <h1>AMANULLAH</h1>
-    <p>Professional MMA Trainer | Fighter | Motivator</p>
-    <a href="#contact" class="btn">Book a Training Session</a>
-  </section>
-<h2 class="heading">Introduction</h2>
-  <section id="about" class="about">
     
-    <p >
-  Hailing from Hijrat Colony, Karachi, Amanullah Memon is a highly accomplished Pakistani MMA fighter and coach. Despite starting work at a young age to support his family, he relentlessly pursued his passion for martial arts. His hard work paid off, making him the first fighter from Karachi to win an MMA title in Islamabad, securing a Gold Medal at the Thailand World Martial Arts Summit, and earning the Asian Pacific Award. Currently, he serves as the Head Coach at 'Fighter's Den,' training the next generation of fighters, and is actively seeking sponsors to represent Pakistan on the global stage.</p>
-    <div class="intro-pic">
-        <img src="pic2.png" alt="" srcset="">
-    </div>
-  </section>
+    <video class="video-bg" autoplay loop muted playsinline>
+        <source src="https://res.cloudinary.com/ddviuaaca/video/upload/v1784193247/Sequence_70_kmyqmv.mp4" type="video/mp4">
+    
+    </video>
+    <div class="video-overlay"></div>
+    <div class="bg-lines"></div>
 
-  <section id="achievements">
-    <h2>Achievements</h2>
-    <div class="achievements">
-      <div class="achievement">
-        <h3>🥇 KCFL Karachi Champion (2019)</h3>
-        <p>  2019 title champion in KCFL Karachi cage fighting League.</p>
-      </div>
-      <div class="achievement">
-        <h3>🥇 International Fighter Recognition</h3>
-        <p>2015 bJJ Gold medal in Thailand.</p>
-      </div>
-      <div class="achievement">
-        <h3>💪 Kazakhstan</h3>
-        <p>Asian champion 2017 in BJJ gold medal champion in Kazakhstan.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="fights">
-    <h2>Past Fights</h2>
-    <div class="fights">
-      <div class="fight">
-        <img src="fight1.png" alt="Fight 1">
-        <div class="fight-info">
-          <h3>Amanullah vs ATIF KHAN</h3>
-          
+    <header>
+        <div class="header-inner">
+            <div class="brand">AMAN<span>ULLAH</span> MEMON</div>
+            <nav>
+                <a href="#about" class="active">About</a>
+                <a href="#achievements">Record</a>
+                <a href="#fights">Fights</a>
+                <a href="#trophies">Trophies</a>
+                <a href="#sponsorship">Sponsor</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
-      </div>
-      <div class="fight">
-        <img src="pic11.png" alt="Fight 2">
-        <div class="fight-info">
-          <h3>SECURED BRONZE MEDAL</h3>
-          
-        </div>
-      </div>
-      <div class="fight">
-        <img src="pic10.png" alt="Fight 3">
-        <div class="fight-info">
-          <h3>AMANULLAH vs SEYED ALI</h3>
-        
-        </div>
-      </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Flowing Redesigned Hero Section -->
+        <section class="hero-section">
+            <div class="brand-logo-area">
+                <div class="logo-main">AMAN<span>ULLAH</span><br>MEMON</div>
+                <div class="logo-sub">Karachi, Pakistan · Head Coach, Fighter's Den</div>
+            </div>
+
+            <div class="hero-content">
+                <p class="hero-tagline">
+                    Mixed martial artist, BJJ competitor and coach — building Pakistan's next generation of fighters, one round at a time.
+                </p>
+                <a href="#sponsorship"><button class="btn-book">View Sponsorship Card</button></a>
+            </div>
+
+            <div class="tape-grid">
+                <div class="tape-item">
+                    <div class="tape-label">Hometown</div>
+                    <div class="tape-value">Karachi <em>PK</em></div>
+                </div>
+                <div class="tape-item">
+                    <div class="tape-label">Discipline</div>
+                    <div class="tape-value">MMA / BJJ</div>
+                </div>
+                <div class="tape-item">
+                    <div class="tape-label">Titles Held</div>
+                    <div class="tape-value">3</div>
+                </div>
+                <div class="tape-item">
+                    <div class="tape-label">Status</div>
+                    <div class="tape-value"><em>Seeking Sponsors</em></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">The Fighter <span>01 / ABOUT</span></h2>
+            <div class="about-grid">
+                <div class="about-photo-frame">
+                    <img src="pic2.png" alt="Amanullah Memon">
+                </div>
+                <div class="about-text">
+                    <h3>Built in Hijrat Colony</h3>
+                    <p class="lede">First fighter from Karachi to win an MMA title in Islamabad — now training the next generation.</p>
+                    <p>Hailing from Hijrat Colony, Karachi, Amanullah Memon is a highly accomplished Pakistani MMA fighter and coach. Despite starting work at a young age to support his family, he relentlessly pursued his passion for martial arts.</p>
+                    <p>His hard work paid off: a Gold Medal at the Thailand World Martial Arts Summit, an Asian Pacific Award, and the distinction of being the first fighter from Karachi to win an MMA title in Islamabad. He now serves as Head Coach at Fighter's Den, and is actively seeking sponsors to represent Pakistan on the global stage.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Record Section -->
+        <section id="achievements">
+            <h2 class="section-title">The Record <span>02 / 03 Titles</span></h2>
+            <div class="timeline">
+                <div class="t-row">
+                    <div class="t-year">2015</div>
+                    <div class="t-body">
+                        <h3>Thailand World Martial Arts Summit</h3>
+                        <p>Gold medal in BJJ, marking Amanullah's first major international recognition.</p>
+                        <span class="t-tag">Gold · BJJ</span>
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-year">2017</div>
+                    <div class="t-body">
+                        <h3>Asian Championship — Kazakhstan</h3>
+                        <p>Crowned Asian champion, taking gold in BJJ on the continental stage.</p>
+                        <span class="t-tag">Gold · BJJ</span>
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-year">2019</div>
+                    <div class="t-body">
+                        <h3>KCFL Karachi Champion</h3>
+                        <p>Title champion in the KCFL Karachi Cage Fighting League — the first fighter from Karachi to hold an Islamabad MMA title.</p>
+                        <span class="t-tag">Title · MMA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fights Log Section -->
+        <section id="fights">
+            <h2 class="section-title">Past Fights <span>03 / Fight Log</span></h2>
+            <div class="fights-grid">
+                <div class="fight-card">
+                    <div class="imgwrap">
+                        <img src="fight1.png" alt="Amanullah vs Atif Khan">
+                        <span class="fight-tag">Main Event</span>
+                    </div>
+                    <div class="fight-info">Amanullah vs Atif Khan</div>
+                </div>
+                <div class="fight-card">
+                    <div class="imgwrap">
+                        <img src="pic11.png" alt="Bronze medal fight">
+                        <span class="fight-tag">Result</span>
+                    </div>
+                    <div class="fight-info">Secured Bronze Medal</div>
+                </div>
+                <div class="fight-card">
+                    <div class="imgwrap">
+                        <img src="pic10.png" alt="Amanullah vs Seyed Ali">
+                        <span class="fight-tag">Main Card</span>
+                    </div>
+                    <div class="fight-info">Amanullah vs Seyed Ali</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cabinet Showcase Gallery -->
+        <section id="trophies">
+            <h2 class="section-title">Trophies &amp; Medals <span>04 / Cabinet</span></h2>
+            <div class="gallery">
+                <figure><img src="piic3.png" alt="Trophy"></figure>
+                <figure><img src="pic4.png" alt="Trophy"></figure>
+                <figure><img src="pic5.png" alt="Trophy"></figure>
+                <figure><img src="pic7.png" alt="Trophy"></figure>
+                <figure><img src="image8.png" alt="Trophy"></figure>
+            </div>
+        </section>
+
+        <!-- Sponsorship Tiers Section -->
+        <section id="sponsorship">
+            <h2 class="section-title">Sponsorship Card <span>05 / 5 Bouts</span></h2>
+            <p style="color: var(--bone-dim); margin-bottom: 30px; max-width: 700px;">
+                Every sponsorship tier is named for its place on fight night — the further down the card, the bigger the stage. Support at any level puts Pakistan in the cage.
+            </p>
+
+            <div class="card-bill">
+                <!-- Bout 01 -->
+                <div class="bout">
+                    <div class="bout-order">01</div>
+                    <div>
+                        <div class="bout-round">Prelims</div>
+                        <div class="bout-title"><h3>Entry Level</h3></div>
+                        <div class="tier-name">Get on the card</div>
+                        <ul class="perks">
+                            <li>Advertising &amp; presence</li>
+                            <li>T-shirts &amp; shorts, printed logo</li>
+                            <li>Boxing gloves, shin pads, head guard, MMA gloves, gum shield &amp; bandage</li>
+                            <li>Sports bag, water bottles &amp; joggers, printed logo</li>
+                            <li>Pakistan track suit</li>
+                            <li>Frozen food</li>
+                            <li>Visa fee</li>
+                        </ul>
+                    </div>
+                    <div class="bout-price">150,000<small>PKR</small></div>
+                </div>
+
+                <!-- Bout 02 -->
+                <div class="bout">
+                    <div class="bout-order">02</div>
+                    <div>
+                        <div class="bout-round">Undercard</div>
+                        <div class="bout-title"><h3>Supporting Level 1</h3></div>
+                        <div class="tier-name">Raise the stakes</div>
+                        <ul class="perks">
+                            <li>Advertising &amp; presence</li>
+                            <li>T-shirts &amp; shorts, printed logo</li>
+                            <li>Boxing gloves, shin pads, head guard, MMA gloves, gum shield &amp; bandage</li>
+                            <li>Sports bag, water bottles &amp; joggers, printed logo</li>
+                            <li>Wallet</li>
+                            <li>Frozen food</li>
+                            <li>Visa fee</li>
+                        </ul>
+                    </div>
+                    <div class="bout-price">250,000<small>PKR</small></div>
+                </div>
+
+                <!-- Bout 03 -->
+                <div class="bout">
+                    <div class="bout-order">03</div>
+                    <div>
+                        <div class="bout-round">Co-Main Event</div>
+                        <div class="bout-title"><h3>Supporting Level 2</h3></div>
+                        <div class="tier-name">Second from the top</div>
+                        <ul class="perks">
+                            <li>Advertising &amp; presence</li>
+                            <li>T-shirts &amp; shorts, printed logo</li>
+                            <li>Wallet</li>
+                            <li>Round trip ticket</li>
+                            <li>Visa fee</li>
+                        </ul>
+                    </div>
+                    <div class="bout-price">500,000<small>PKR</small></div>
+                </div>
+
+                <!-- Bout 04 -->
+                <div class="bout">
+                    <div class="bout-order">04</div>
+                    <div>
+                        <div class="bout-round">Main Event</div>
+                        <div class="bout-title"><h3>Supporting Level 3</h3></div>
+                        <div class="tier-name">Top of the marquee</div>
+                        <ul class="perks">
+                            <li>Advertising &amp; presence</li>
+                            <li>T-shirts &amp; shorts, printed logo</li>
+                            <li>Wallet</li>
+                            <li>Sports bag, water bottles &amp; joggers, printed logo</li>
+                            <li>Frozen food</li>
+                            <li>Pakistan track suit</li>
+                            <li>Round trip ticket</li>
+                            <li>Visa fee</li>
+                        </ul>
+                    </div>
+                    <div class="bout-price">600,000<small>PKR</small></div>
+                </div>
+
+                <!-- Bout 05 -->
+                <div class="bout featured">
+                    <div class="bout-order">05</div>
+                    <div>
+                        <div class="bout-round">Championship Round</div>
+                        <div class="bout-title"><h3>Official Level</h3></div>
+                        <div class="tier-name">Full camp, full backing</div>
+                        <ul class="perks">
+                            <li>Advertising &amp; presence</li>
+                            <li>T-shirts &amp; shorts, printed logo</li>
+                            <li>Boxing gloves, shin pads, head guard, MMA gloves, gum shield &amp; bandage</li>
+                            <li>Sports bag, water bottles &amp; joggers, printed logo</li>
+                            <li>Visa fee</li>
+                            <li>Wallet for outdoor training</li>
+                            <li>Round trip ticket</li>
+                            <li>Pakistan track suit</li>
+                            <li>Fight camp — one month</li>
+                            <li>Hoteling — one month</li>
+                            <li>Food package — one month</li>
+                            <li>Camp training — one month</li>
+                            <li>Fight entry fee</li>
+                        </ul>
+                    </div>
+                    <div class="bout-price">1,000,000<small>PKR</small></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section id="contact">
+            <h2 class="section-title">Corner Call <span>06 / CONTACT</span></h2>
+            <div class="contact-grid">
+                <div class="contact-note">
+                    <p class="big">Ready to put Pakistan in the cage?</p>
+                    <p>Send a message about training, sponsorship, or booking Amanullah for an appearance — he reads every one himself.</p>
+                </div>
+                <form id="web3form">
+                    <input type="hidden" name="access_key" value="e03bf4e0-46a3-41a2-b69c-81817c84da01">
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required />
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@email.com" required />
+                    </div>
+                    <div class="field">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="03XXXXXXXXX" pattern="[0-9]{10,15}" required />
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us what you're reaching out about" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+
     </div>
-  </section>
 
-  <section id="trophies">
-    <h2>Trophies & Medals</h2>
-    <div class="gallery">
-      
-      <img src="piic3.png" alt="Trophy 2">
-      <img src="pic4.png" alt="Trophy 3">
-      <img src="pic5.png" alt="Trophy 4">
-      <img src="pic7.png" alt="Trophy 5">
-      <img src="image8.png" alt="Trophy 6">
-      
-      
-     
-    </div>
-  </section>
-<section id="sponsorship-benefits" style="width: 100%; text-align: center;">
-        
-        <h2 style="color: #FF0000; text-transform: uppercase; font-size: 2em; margin-bottom: 40px;">
-            SPONSORSHIP BENEFITS
-        </h2>
-        
-        <div class="benefits-container" style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap;">
-            
-            <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
-                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 70px;">Entry Level 150,000</h3>
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Boxing Gloves, Shin pads, Head Guard, MMA Gloves, Gum Sheild & Bandage</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Sports bag, Water Bottles with printed logo & Joggers</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">4.Pakistan Track suit</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">5.Frozen Food</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">6.Visa Fee</li>
-                </ul>
-            </div>
-            
-            <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
-                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Supporting Level 1 250,000</h3>
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Boxing Gloves, Shin pads, Head Guard, MMA Gloves, Gum Sheild & Bandage</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Sports bag, Water Bottles with printed logo & Joggers</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">4.Wallet</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">5.Frozen Food</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">6.Visa Fee</li>
-                </ul>
-            </div>
-            
-            <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
-                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Supporting Level 2 500,000</h3>
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Wallet</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Round Trip Ticket</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">4.Visa Fee</li>
-                </ul>
-            </div>
-              <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
-                <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Supporting Level 3 600,000</h3>
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">1.T Shirts & Shorts Printed logo</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">2.Wallet</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">3.Sports bag, Water Bottles with printed logo & Joggers</li>
-                          <li style="line-height: 1.5; margin-bottom: 8px;">4.Frozen Food</li>
-                     <li style="line-height: 1.5; margin-bottom: 8px;">5.Pakistan Track suit</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">6.Round Trip Ticket</li>
-                    <li style="line-height: 1.5; margin-bottom: 8px;">7.Visa Fee</li>
-                </ul>
-            </div>
-            <img src="pic13.png" alt="Trophy 2"class="responsive-img">
-              <div class="sponsorship-card" style="text-align: left; max-width: 300px;">
-    <h3 style="font-size: 1.8em; font-weight: bold; margin-bottom: 20px;">Official Level 10,00,000</h3>
-    <ul style="list-style-type: none; padding: 0; margin: 0;">
-        <li style="line-height: 1.5; margin-bottom: 8px;">Advertising & Presence</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">1. T Shirts & Shorts Printed logo</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">2. Boxing Gloves, Shin pads, Head Guard, MMA Gloves, Gum Sheild & Bandage</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">3. Sports bag, Water Bottles withprinted logo & Joggers</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">4. Visa Fee</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">5. Wallet</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">6. Round Trip Ticket</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">7. Fight Camp for one month</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">8. Hoteling for one month</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">9. Food Package for one month</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">10. Wallet for oudoor training activities</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">11. Pakistan track suit</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">12. Camp Training for 1 Month</li>
-        <li style="line-height: 1.5; margin-bottom: 8px;">13. Fight Entry Fee</li>
-    </ul>
-</div>
-<!-- HTML -->
-<img src="pic14.png" alt="Trophy 2" class="responsive-img">
+    <footer>© 2026 Amanullah Memon MMA · All Rights Reserved</footer>
 
+    <script>
+        // Web3Form Integration Logic
+        const form = document.getElementById('web3form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                await res.json();
+                alert('Message sent! Thank you, Amanullah.');
+                form.reset();
+            } catch (err) {
+                alert('Error sending message. Try again.');
+                console.error(err);
+            }
+        });
 
-        </div>
-    </section>
-<section id="contact">
-  <h2>Contact Amanullah</h2>
-  <form id="web3form">
-    <input type="hidden" name="access_key" value="e03bf4e0-46a3-41a2-b69c-81817c84da01">
-
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <input type="tel" name="phone" placeholder="Your Phone Number" pattern="[0-9]{10,15}" required />
-
-    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
-
-<script>
-  const form = document.getElementById('web3form');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      alert('Message sent! Thank you, Amanullah.');
-      form.reset();
-    } catch (err) {
-      alert('Error sending message. Try again.');
-      console.error(err);
-    }
-  });
-</script>
-
-
-  <footer>
-    <p>© 2025 Amanullah MMA. All Rights Reserved.</p>
-  </footer>
+        // Simple Nav Highlighting Tracker
+        const links = document.querySelectorAll('nav a');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                links.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin | Amanullah Memon MMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0908; --canvas:#16140f; --canvas-2:#1d1a14; --canvas-3:#221f18;
+    --line:#33301f; --crimson:#e8323d; --crimson-dk:#7d151d;
+    --bone:#f2ead9; --bone-dim:#b9b09a; --gold:#c9a961; --steel:#706a58;
+    --green:#5fa96a;
+    --display:'Anton',sans-serif; --body:'Work Sans',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--void);color:var(--bone);font-family:var(--body);line-height:1.6;}
+  h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:0.01em;}
+  a{color:inherit;}
+  input,textarea,select{
+    background:var(--canvas-2);border:1px solid var(--line);color:var(--bone);
+    font-family:var(--body);font-size:14.5px;padding:10px 12px;border-radius:2px;width:100%;
+    transition:border-color .2s ease;
+  }
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--crimson);}
+  textarea{resize:vertical;min-height:70px;}
+  label{font-family:var(--mono);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--steel);display:block;margin-bottom:6px;}
+  button{font-family:var(--mono);cursor:pointer;border:none;}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--crimson);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .eyebrow::before{content:"";width:16px;height:2px;background:var(--crimson);}
+
+  .btn{
+    font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 20px;border:1px solid var(--crimson);background:var(--crimson);color:var(--void);
+    transition:.2s ease; display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn:hover{background:transparent;color:var(--bone);}
+  .btn.ghost{background:transparent;color:var(--bone-dim);border-color:var(--line);}
+  .btn.ghost:hover{border-color:var(--bone-dim);color:var(--bone);}
+  .btn.danger{background:transparent;color:var(--crimson);border-color:var(--crimson-dk);}
+  .btn.danger:hover{background:var(--crimson-dk);color:var(--bone);}
+  .btn.sm{padding:7px 12px;font-size:10.5px;}
+
+  /* ---------------- LOGIN ---------------- */
+  #loginScreen{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(ellipse at 75% 20%, rgba(232,50,61,0.14), transparent 55%),
+      var(--void);
+    padding:20px;
+  }
+  .login-box{width:100%;max-width:400px;border:1px solid var(--line);padding:44px 38px;background:var(--canvas);position:relative;}
+  .login-box::before{content:"";position:absolute;top:0;right:0;width:70px;height:70px;background:linear-gradient(135deg,var(--crimson),var(--crimson-dk));clip-path:polygon(100% 0,100% 100%,0 0);}
+  .login-box h1{font-size:34px;margin-bottom:6px;}
+  .login-box .sub{color:var(--bone-dim);font-size:14px;margin-bottom:30px;}
+  .login-box .field{margin-bottom:18px;}
+  .login-note{font-size:12px;color:var(--steel);margin-top:18px;line-height:1.6;}
+  .login-error{color:var(--crimson);font-size:13px;margin-top:14px;display:none;font-family:var(--mono);}
+
+  /* ---------------- SHELL ---------------- */
+  #appShell{display:none;min-height:100vh;grid-template-columns:260px 1fr;}
+  #appShell.active{display:grid;}
+
+  aside{
+    background:var(--canvas);border-right:1px solid var(--line);
+    padding:26px 20px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
+  }
+  .brand{font-family:var(--display);font-size:20px;display:flex;align-items:center;gap:9px;margin-bottom:6px;}
+  .brand::before{content:"";width:9px;height:9px;background:var(--crimson);}
+  .brand-sub{font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:34px;}
+
+  .navgroup{margin-bottom:22px;}
+  .navgroup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--steel);margin-bottom:10px;padding:0 10px;}
+  .navlink{
+    display:flex;align-items:center;gap:10px;padding:10px 10px;font-size:14px;color:var(--bone-dim);
+    border-left:2px solid transparent;transition:.2s ease;cursor:pointer;font-weight:500;
+  }
+  .navlink:hover{color:var(--bone);}
+  .navlink.active{color:var(--bone);border-left-color:var(--crimson);background:rgba(232,50,61,0.06);}
+  .navlink .dot{width:5px;height:5px;background:var(--steel);border-radius:50%;}
+  .navlink.active .dot{background:var(--crimson);}
+
+  .sidebar-foot{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);}
+  .sidebar-foot .who{font-size:13px;color:var(--bone);margin-bottom:2px;}
+  .sidebar-foot .role{font-family:var(--mono);font-size:10.5px;color:var(--steel);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;}
+
+  main{padding:40px 46px;overflow-y:auto;}
+  .view{display:none;}
+  .view.active{display:block;animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .view-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px;}
+  .view-head h2{font-size:36px;}
+  .view-head .desc{color:var(--bone-dim);font-size:14.5px;margin-top:6px;max-width:520px;}
+
+  /* ---------------- CARDS / STATS ---------------- */
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:44px;}
+  .stat-card{background:var(--canvas);border:1px solid var(--line);padding:22px;}
+  .stat-card .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--steel);margin-bottom:12px;}
+  .stat-card .val{font-family:var(--display);font-size:34px;color:var(--bone);}
+  .stat-card .val em{color:var(--crimson);font-style:normal;}
+
+  .panel{background:var(--canvas);border:1px solid var(--line);padding:26px;margin-bottom:24px;}
+  .panel h3{font-size:19px;margin-bottom:18px;text-transform:none;color:var(--bone);font-family:var(--display);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field{margin-bottom:16px;}
+
+  /* ---------------- LIST ROWS ---------------- */
+  .row-list{border-top:1px solid var(--line);}
+  .row-item{
+    border-bottom:1px solid var(--line);padding:18px 4px;display:grid;
+    grid-template-columns:44px 1fr auto;gap:16px;align-items:center;
+  }
+  .row-order{font-family:var(--mono);color:var(--steel);font-size:13px;}
+  .row-main h4{font-family:var(--display);font-size:17px;color:var(--bone);text-transform:none;margin-bottom:4px;}
+  .row-main p{font-size:13.5px;color:var(--bone-dim);}
+  .row-meta{font-family:var(--mono);font-size:10.5px;color:var(--crimson);text-transform:uppercase;letter-spacing:0.12em;margin-top:4px;display:inline-block;}
+  .row-actions{display:flex;gap:8px;}
+
+  .add-form{border:1px dashed var(--line);padding:22px;margin-top:20px;display:none;}
+  .add-form.open{display:block;}
+
+  .empty{color:var(--steel);font-size:13.5px;padding:30px 4px;font-family:var(--mono);}
+
+  /* gallery thumbs */
+  .thumb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+  .thumb-card{border:1px solid var(--line);background:var(--canvas-2);padding:10px;position:relative;}
+  .thumb-card .ph{height:100px;background:var(--canvas-3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--steel);margin-bottom:8px;text-align:center;padding:6px;word-break:break-all;}
+  .thumb-card .btn{width:100%;justify-content:center;}
+
+  /* messages */
+  .msg-note{background:var(--canvas-2);border-left:3px solid var(--gold);padding:16px 18px;font-size:13.5px;color:var(--bone-dim);margin-bottom:22px;}
+  .msg-note strong{color:var(--gold);}
+
+  .toast{
+    position:fixed;bottom:26px;right:26px;background:var(--canvas);border:1px solid var(--crimson);
+    padding:14px 20px;font-family:var(--mono);font-size:12.5px;letter-spacing:0.06em;
+    transform:translateY(20px);opacity:0;transition:.3s ease;pointer-events:none;z-index:200;
+  }
+  .toast.show{transform:translateY(0);opacity:1;}
+
+  @media (max-width:960px){
+    #appShell{grid-template-columns:1fr;}
+    aside{position:relative;height:auto;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .grid2{grid-template-columns:1fr;}
+    main{padding:30px 20px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= LOGIN ================= -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h1>Corner<br>Access</h1>
+      <p class="sub">Admin portal · Amanullah Memon MMA</p>
+      <form id="loginForm">
+        <div class="field">
+          <label for="user">Username</label>
+          <input id="user" type="text" placeholder="admin" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="pass">Password</label>
+          <input id="pass" type="password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn" style="width:100%;justify-content:center;">Enter Corner →</button>
+        <p class="login-error" id="loginError">Wrong credentials. Try again.</p>
+      </form>
+      <p class="login-note">Demo credentials: <strong style="color:var(--bone);">admin / fightersden2025</strong><br>
+      This is a client-side demo login for editing content only — wire it up to a real auth backend before going live.</p>
+    </div>
+  </div>
+
+  <!-- ================= APP SHELL ================= -->
+  <div id="appShell">
+    <aside>
+      <div class="brand">AMANULLAH</div>
+      <div class="brand-sub">Admin · Corner Panel</div>
+
+      <div class="navgroup">
+        <div class="navgroup-label">Overview</div>
+        <div class="navlink active" data-view="overview"><span class="dot"></span> Dashboard</div>
+      </div>
+
+      <div class="navgroup">
+        <div class="navgroup-label">Content</div>
+        <div class="navlink" data-view="profile"><span class="dot"></span> Fighter Profile</div>
+        <div class="navlink" data-view="record"><span class="dot"></span> Fight Record</div>
+        <div class="navlink" data-view="fights"><span class="dot"></span> Fight Log</div>
+        <div class="navlink" data-view="trophies"><span class="dot"></span> Trophy Cabinet</div>
+        <div class="navlink" data-view="sponsorship"><span class="dot"></span> Sponsorship Card</div>
+      </div>
+
+      <div class="navgroup">
+        <div class="navgroup-label">Operations</div>
+        <div class="navlink" data-view="inbox"><span class="dot"></span> Inbox</div>
+        <div class="navlink" data-view="settings"><span class="dot"></span> Settings</div>
+      </div>
+
+      <div class="sidebar-foot">
+        <div class="who">Admin</div>
+        <div class="role">Fighter's Den</div>
+        <div class="navlink" id="logoutBtn" style="padding:8px 10px;"><span class="dot"></span> Log out</div>
+      </div>
+    </aside>
+
+    <main>
+
+      <!-- OVERVIEW -->
+      <div class="view active" id="view-overview">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h2>Fight Camp Overview</h2>
+            <p class="desc">A snapshot of everything live on Amanullah's site right now.</p>
+          </div>
+        </div>
+        <div class="stat-grid" id="statGrid"></div>
+        <div class="panel">
+          <h3>Quick Actions</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn" onclick="goto_('record')">+ Add Title</button>
+            <button class="btn ghost" onclick="goto_('fights')">+ Add Fight</button>
+            <button class="btn ghost" onclick="goto_('sponsorship')">Edit Sponsorship Card</button>
+            <button class="btn ghost" onclick="goto_('settings')">Export Site Data</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="view" id="view-profile">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Fighter Profile</p>
+            <h2>Hero &amp; Bio</h2>
+            <p class="desc">This content feeds the hero section and About block on the live site.</p>
+          </div>
+          <button class="btn" onclick="saveProfile()">Save Changes</button>
+        </div>
+
+        <div class="panel">
+          <h3>Tale of the Tape</h3>
+          <div class="grid2">
+            <div class="field"><label>Hometown</label><input id="p-hometown"></div>
+            <div class="field"><label>Discipline</label><input id="p-discipline"></div>
+            <div class="field"><label>Titles Held</label><input id="p-titles"></div>
+            <div class="field"><label>Status</label><input id="p-status"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Hero Copy</h3>
+          <div class="field"><label>Tagline</label><textarea id="p-tagline"></textarea></div>
+        </div>
+
+        <div class="panel">
+          <h3>About Bio</h3>
+          <div class="field"><label>Lede (bold intro line)</label><textarea id="p-lede"></textarea></div>
+          <div class="field"><label>Paragraph 1</label><textarea id="p-bio1"></textarea></div>
+          <div class="field"><label>Paragraph 2</label><textarea id="p-bio2"></textarea></div>
+        </div>
+      </div>
+
+      <!-- RECORD (achievements timeline) -->
+      <div class="view" id="view-record">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Fight Record</p>
+            <h2>Titles &amp; Timeline</h2>
+            <p class="desc">Shown as the vertical career timeline on the site.</p>
+          </div>
+          <button class="btn" onclick="toggleForm('recordForm')">+ Add Title</button>
+        </div>
+
+        <div class="add-form" id="recordForm">
+          <div class="grid2">
+            <div class="field"><label>Year</label><input id="r-year" placeholder="2024"></div>
+            <div class="field"><label>Tag</label><input id="r-tag" placeholder="Gold · BJJ"></div>
+          </div>
+          <div class="field"><label>Title</label><input id="r-title" placeholder="e.g. National Championship"></div>
+          <div class="field"><label>Description</label><textarea id="r-desc"></textarea></div>
+          <button class="btn" onclick="addRecord()">Save Title</button>
+          <button class="btn ghost" onclick="toggleForm('recordForm')">Cancel</button>
+        </div>
+
+        <div class="row-list" id="recordList"></div>
+      </div>
+
+      <!-- FIGHTS -->
+      <div class="view" id="view-fights">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Fight Log</p>
+            <h2>Past Fights</h2>
+            <p class="desc">Poster cards shown in the Fights section of the site.</p>
+          </div>
+          <button class="btn" onclick="toggleForm('fightForm')">+ Add Fight</button>
+        </div>
+
+        <div class="add-form" id="fightForm">
+          <div class="grid2">
+            <div class="field"><label>Fight Title</label><input id="f-title" placeholder="Amanullah vs Opponent"></div>
+            <div class="field"><label>Tag</label><input id="f-tag" placeholder="Main Event"></div>
+          </div>
+          <div class="field"><label>Image filename</label><input id="f-img" placeholder="fight2.png"></div>
+          <button class="btn" onclick="addFight()">Save Fight</button>
+          <button class="btn ghost" onclick="toggleForm('fightForm')">Cancel</button>
+        </div>
+
+        <div class="row-list" id="fightList"></div>
+      </div>
+
+      <!-- TROPHIES -->
+      <div class="view" id="view-trophies">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Trophy Cabinet</p>
+            <h2>Medals &amp; Trophies</h2>
+            <p class="desc">Gallery images shown in the Trophies section.</p>
+          </div>
+          <button class="btn" onclick="toggleForm('trophyForm')">+ Add Image</button>
+        </div>
+
+        <div class="add-form" id="trophyForm">
+          <div class="field"><label>Image filename</label><input id="t-img" placeholder="pic15.png"></div>
+          <div class="field"><label>Alt text</label><input id="t-alt" placeholder="Trophy"></div>
+          <button class="btn" onclick="addTrophy()">Save Image</button>
+          <button class="btn ghost" onclick="toggleForm('trophyForm')">Cancel</button>
+        </div>
+
+        <div class="thumb-grid" id="trophyGrid"></div>
+      </div>
+
+      <!-- SPONSORSHIP -->
+      <div class="view" id="view-sponsorship">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Sponsorship Card</p>
+            <h2>Fight-Card Tiers</h2>
+            <p class="desc">Prelims → Championship Round. Edit prices and perks per tier.</p>
+          </div>
+          <button class="btn" onclick="toggleForm('tierForm')">+ Add Tier</button>
+        </div>
+
+        <div class="add-form" id="tierForm">
+          <div class="grid2">
+            <div class="field"><label>Round label</label><input id="s-round" placeholder="Prelims"></div>
+            <div class="field"><label>Tier name</label><input id="s-name" placeholder="Entry Level"></div>
+          </div>
+          <div class="grid2">
+            <div class="field"><label>Subtitle</label><input id="s-sub" placeholder="Get on the card"></div>
+            <div class="field"><label>Price (PKR)</label><input id="s-price" placeholder="150000"></div>
+          </div>
+          <div class="field"><label>Perks (one per line)</label><textarea id="s-perks" rows="5"></textarea></div>
+          <button class="btn" onclick="addTier()">Save Tier</button>
+          <button class="btn ghost" onclick="toggleForm('tierForm')">Cancel</button>
+        </div>
+
+        <div class="row-list" id="tierList"></div>
+      </div>
+
+      <!-- INBOX -->
+      <div class="view" id="view-inbox">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Inbox</p>
+            <h2>Messages</h2>
+            <p class="desc">Contact form submissions and manual follow-up notes.</p>
+          </div>
+        </div>
+
+        <div class="msg-note">
+          <strong>Heads up —</strong> the live contact form submits through Web3Forms, not this admin panel. Real submissions land in the inbox of the email tied to your Web3Forms access key. Use the log below to jot down calls, DMs, or anything you want to track manually.
+        </div>
+
+        <div class="panel">
+          <h3>Add a Note</h3>
+          <div class="grid2">
+            <div class="field"><label>From</label><input id="m-from" placeholder="Name / company"></div>
+            <div class="field"><label>Channel</label><input id="m-channel" placeholder="Call, Instagram, Email..."></div>
+          </div>
+          <div class="field"><label>Note</label><textarea id="m-note" rows="3"></textarea></div>
+          <button class="btn" onclick="addNote()">Log Note</button>
+        </div>
+
+        <div class="row-list" id="noteList"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="view" id="view-settings">
+        <div class="view-head">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h2>Data &amp; Handoff</h2>
+            <p class="desc">This admin panel stores content in your browser (no live database yet). Export it to hand off to whoever updates the site.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Export</h3>
+          <p style="color:var(--bone-dim);font-size:13.5px;margin-bottom:16px;">Download everything as JSON so a developer can drop it straight into the site.</p>
+          <button class="btn" onclick="exportJSON()">Download site-data.json</button>
+        </div>
+
+        <div class="panel">
+          <h3>Danger Zone</h3>
+          <p style="color:var(--bone-dim);font-size:13.5px;margin-bottom:16px;">Reset all content back to the original site defaults. This cannot be undone.</p>
+          <button class="btn danger" onclick="resetData()">Reset to Defaults</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  /* ---------------- AUTH (client-side demo only) ---------------- */
+  const CREDS = { user: 'admin', pass: 'fightersden2025' };
+
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const u = document.getElementById('user').value.trim();
+    const p = document.getElementById('pass').value;
+    if (u === CREDS.user && p === CREDS.pass) {
+      localStorage.setItem('amanullah_admin_auth', '1');
+      showApp();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('amanullah_admin_auth');
+    document.getElementById('appShell').classList.remove('active');
+    document.getElementById('loginScreen').style.display = 'flex';
+  });
+
+  function showApp(){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('appShell').classList.add('active');
+    render();
+  }
+  if (localStorage.getItem('amanullah_admin_auth') === '1') showApp();
+
+  /* ---------------- DATA ---------------- */
+  const DEFAULTS = {
+    profile: {
+      hometown: 'Karachi, PK', discipline: 'MMA / BJJ', titles: '3', status: 'Seeking Sponsors',
+      tagline: "Mixed martial artist, BJJ competitor and coach — building Pakistan's next generation of fighters, one round at a time.",
+      lede: "First fighter from Karachi to win an MMA title in Islamabad — now training the next generation.",
+      bio1: "Hailing from Hijrat Colony, Karachi, Amanullah Memon is a highly accomplished Pakistani MMA fighter and coach. Despite starting work at a young age to support his family, he relentlessly pursued his passion for martial arts.",
+      bio2: "His hard work paid off: a Gold Medal at the Thailand World Martial Arts Summit, an Asian Pacific Award, and the distinction of being the first fighter from Karachi to win an MMA title in Islamabad. He now serves as Head Coach at Fighter's Den, and is actively seeking sponsors to represent Pakistan on the global stage."
+    },
+    record: [
+      { year:'2015', title:'Thailand World Martial Arts Summit', desc:"Gold medal in BJJ, marking Amanullah's first major international recognition.", tag:'Gold · BJJ' },
+      { year:'2017', title:'Asian Championship — Kazakhstan', desc:'Crowned Asian champion, taking gold in BJJ on the continental stage.', tag:'Gold · BJJ' },
+      { year:'2019', title:'KCFL Karachi Champion', desc:'Title champion in the KCFL Karachi Cage Fighting League — the first fighter from Karachi to hold an Islamabad MMA title.', tag:'Title · MMA' }
+    ],
+    fights: [
+      { title:'Amanullah vs Atif Khan', img:'fight1.png', tag:'Main Event' },
+      { title:'Secured Bronze Medal', img:'pic11.png', tag:'Result' },
+      { title:'Amanullah vs Seyed Ali', img:'pic10.png', tag:'Main Card' }
+    ],
+    trophies: [
+      { img:'piic3.png', alt:'Trophy' },
+      { img:'pic4.png', alt:'Trophy' },
+      { img:'pic5.png', alt:'Trophy' },
+      { img:'pic7.png', alt:'Trophy' },
+      { img:'image8.png', alt:'Trophy' }
+    ],
+    tiers: [
+      { round:'Prelims', name:'Entry Level', sub:'Get on the card', price:150000, perks:['Advertising & presence','T-shirts & shorts, printed logo','Boxing gloves, shin pads, head guard, MMA gloves, gum shield & bandage','Sports bag, water bottles & joggers, printed logo','Pakistan track suit','Frozen food','Visa fee'] },
+      { round:'Undercard', name:'Supporting Level 1', sub:'Raise the stakes', price:250000, perks:['Advertising & presence','T-shirts & shorts, printed logo','Boxing gloves, shin pads, head guard, MMA gloves, gum shield & bandage','Sports bag, water bottles & joggers, printed logo','Wallet','Frozen food','Visa fee'] },
+      { round:'Co-Main Event', name:'Supporting Level 2', sub:'Second from the top', price:500000, perks:['Advertising & presence','T-shirts & shorts, printed logo','Wallet','Round trip ticket','Visa fee'] },
+      { round:'Main Event', name:'Supporting Level 3', sub:'Top of the marquee', price:600000, perks:['Advertising & presence','T-shirts & shorts, printed logo','Wallet','Sports bag, water bottles & joggers, printed logo','Frozen food','Pakistan track suit','Round trip ticket','Visa fee'] },
+      { round:'Championship Round', name:'Official Level', sub:'Full camp, full backing', price:1000000, perks:['Advertising & presence','T-shirts & shorts, printed logo','Boxing gloves, shin pads, head guard, MMA gloves, gum shield & bandage','Sports bag, water bottles & joggers, printed logo','Visa fee','Wallet for outdoor training','Round trip ticket','Pakistan track suit','Fight camp — one month','Hoteling — one month','Food package — one month','Camp training — one month','Fight entry fee'] }
+    ],
+    notes: []
+  };
+
+  function loadData(){
+    const raw = localStorage.getItem('amanullah_admin_data');
+    if (!raw) { localStorage.setItem('amanullah_admin_data', JSON.stringify(DEFAULTS)); return JSON.parse(JSON.stringify(DEFAULTS)); }
+    try { return JSON.parse(raw); } catch(e){ return JSON.parse(JSON.stringify(DEFAULTS)); }
+  }
+  function saveData(){ localStorage.setItem('amanullah_admin_data', JSON.stringify(DATA)); toast('Saved'); }
+  let DATA = loadData();
+
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+  }
+
+  /* ---------------- NAV ---------------- */
+  document.querySelectorAll('.navlink[data-view]').forEach(el=>{
+    el.addEventListener('click', ()=>goto_(el.dataset.view));
+  });
+  function goto_(view){
+    document.querySelectorAll('.navlink[data-view]').forEach(el=>el.classList.toggle('active', el.dataset.view===view));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById('view-'+view).classList.add('active');
+  }
+
+  function toggleForm(id){
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  /* ---------------- RENDER ---------------- */
+  function render(){
+    renderStats();
+    renderProfile();
+    renderRecord();
+    renderFights();
+    renderTrophies();
+    renderTiers();
+    renderNotes();
+  }
+
+  function renderStats(){
+    const revenue = DATA.tiers.reduce((s,t)=>s+Number(t.price||0),0);
+    document.getElementById('statGrid').innerHTML = `
+      <div class="stat-card"><div class="lbl">Titles Held</div><div class="val">${DATA.record.length}</div></div>
+      <div class="stat-card"><div class="lbl">Fights Logged</div><div class="val">${DATA.fights.length}</div></div>
+      <div class="stat-card"><div class="lbl">Trophies</div><div class="val">${DATA.trophies.length}</div></div>
+      <div class="stat-card"><div class="lbl">Full Card Value</div><div class="val"><em>₨</em> ${revenue.toLocaleString()}</div></div>
+    `;
+  }
+
+  function renderProfile(){
+    const p = DATA.profile;
+    document.getElementById('p-hometown').value = p.hometown;
+    document.getElementById('p-discipline').value = p.discipline;
+    document.getElementById('p-titles').value = p.titles;
+    document.getElementById('p-status').value = p.status;
+    document.getElementById('p-tagline').value = p.tagline;
+    document.getElementById('p-lede').value = p.lede;
+    document.getElementById('p-bio1').value = p.bio1;
+    document.getElementById('p-bio2').value = p.bio2;
+  }
+  function saveProfile(){
+    DATA.profile = {
+      hometown: val('p-hometown'), discipline: val('p-discipline'), titles: val('p-titles'), status: val('p-status'),
+      tagline: val('p-tagline'), lede: val('p-lede'), bio1: val('p-bio1'), bio2: val('p-bio2')
+    };
+    saveData();
+  }
+  function val(id){ return document.getElementById(id).value; }
+
+  function renderRecord(){
+    const list = document.getElementById('recordList');
+    if (!DATA.record.length){ list.innerHTML = '<div class="empty">No titles yet.</div>'; return; }
+    list.innerHTML = DATA.record.map((r,i)=>`
+      <div class="row-item">
+        <div class="row-order">${r.year}</div>
+        <div class="row-main">
+          <h4>${esc(r.title)}</h4>
+          <p>${esc(r.desc)}</p>
+          <span class="row-meta">${esc(r.tag)}</span>
+        </div>
+        <div class="row-actions">
+          <button class="btn danger sm" onclick="deleteItem('record',${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  function addRecord(){
+    const year=val('r-year'), title=val('r-title'), desc=val('r-desc'), tag=val('r-tag');
+    if(!year||!title) return toast('Year and title required');
+    DATA.record.push({year,title,desc,tag});
+    DATA.record.sort((a,b)=>a.year.localeCompare(b.year));
+    ['r-year','r-title','r-desc','r-tag'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('recordForm'); renderRecord(); renderStats(); saveData();
+  }
+
+  function renderFights(){
+    const list = document.getElementById('fightList');
+    if (!DATA.fights.length){ list.innerHTML = '<div class="empty">No fights logged.</div>'; return; }
+    list.innerHTML = DATA.fights.map((f,i)=>`
+      <div class="row-item">
+        <div class="row-order">${String(i+1).padStart(2,'0')}</div>
+        <div class="row-main">
+          <h4>${esc(f.title)}</h4>
+          <p>Image: ${esc(f.img)}</p>
+          <span class="row-meta">${esc(f.tag)}</span>
+        </div>
+        <div class="row-actions">
+          <button class="btn danger sm" onclick="deleteItem('fights',${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  function addFight(){
+    const title=val('f-title'), img=val('f-img'), tag=val('f-tag');
+    if(!title||!img) return toast('Title and image required');
+    DATA.fights.push({title,img,tag: tag||'Fight'});
+    ['f-title','f-img','f-tag'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('fightForm'); renderFights(); renderStats(); saveData();
+  }
+
+  function renderTrophies(){
+    const grid = document.getElementById('trophyGrid');
+    if (!DATA.trophies.length){ grid.innerHTML = '<div class="empty">No trophy images yet.</div>'; return; }
+    grid.innerHTML = DATA.trophies.map((t,i)=>`
+      <div class="thumb-card">
+        <div class="ph">${esc(t.img)}</div>
+        <button class="btn danger sm" onclick="deleteItem('trophies',${i})">Remove</button>
+      </div>
+    `).join('');
+  }
+  function addTrophy(){
+    const img=val('t-img'), alt=val('t-alt');
+    if(!img) return toast('Filename required');
+    DATA.trophies.push({img, alt: alt||'Trophy'});
+    ['t-img','t-alt'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('trophyForm'); renderTrophies(); renderStats(); saveData();
+  }
+
+  function renderTiers(){
+    const list = document.getElementById('tierList');
+    list.innerHTML = DATA.tiers.map((t,i)=>`
+      <div class="row-item">
+        <div class="row-order">${String(i+1).padStart(2,'0')}</div>
+        <div class="row-main">
+          <h4>${esc(t.name)} <span style="color:var(--gold);font-family:var(--mono);font-size:13px;">₨ ${Number(t.price).toLocaleString()}</span></h4>
+          <p>${esc(t.sub)} · ${t.perks.length} perks</p>
+          <span class="row-meta">${esc(t.round)}</span>
+        </div>
+        <div class="row-actions">
+          <button class="btn danger sm" onclick="deleteItem('tiers',${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  function addTier(){
+    const round=val('s-round'), name=val('s-name'), sub=val('s-sub'), price=Number(val('s-price'))||0;
+    const perks = val('s-perks').split('\n').map(s=>s.trim()).filter(Boolean);
+    if(!name||!price) return toast('Tier name and price required');
+    DATA.tiers.push({round,name,sub,price,perks});
+    ['s-round','s-name','s-sub','s-price','s-perks'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('tierForm'); renderTiers(); renderStats(); saveData();
+  }
+
+  function renderNotes(){
+    const list = document.getElementById('noteList');
+    if (!DATA.notes.length){ list.innerHTML = '<div class="empty">No notes logged yet.</div>'; return; }
+    list.innerHTML = DATA.notes.slice().reverse().map((n)=>{
+      const i = DATA.notes.indexOf(n);
+      return `
+      <div class="row-item">
+        <div class="row-order">${new Date(n.date).toLocaleDateString()}</div>
+        <div class="row-main">
+          <h4>${esc(n.from)}</h4>
+          <p>${esc(n.note)}</p>
+          <span class="row-meta">${esc(n.channel)}</span>
+        </div>
+        <div class="row-actions">
+          <button class="btn danger sm" onclick="deleteItem('notes',${i})">Delete</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  function addNote(){
+    const from=val('m-from'), channel=val('m-channel'), note=val('m-note');
+    if(!from||!note) return toast('Name and note required');
+    DATA.notes.push({from,channel:channel||'Note',note,date:Date.now()});
+    ['m-from','m-channel','m-note'].forEach(id=>document.getElementById(id).value='');
+    renderNotes(); saveData();
+  }
+
+  function deleteItem(collection, index){
+    DATA[collection].splice(index,1);
+    render(); saveData();
+  }
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  function exportJSON(){
+    const blob = new Blob([JSON.stringify(DATA, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'site-data.json'; a.click();
+    URL.revokeObjectURL(url);
+    toast('Exported');
+  }
+
+  function resetData(){
+    if(!confirm('Reset all content to defaults? This cannot be undone.')) return;
+    DATA = JSON.parse(JSON.stringify(DEFAULTS));
+    saveData(); render();
+  }
+</script>
+</body>
+</html>
