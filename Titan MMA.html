@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Titan MMA – Coach &amp; Fighter Management</title>
+<meta name="description" content="Titan MMA: elite MMA coaching and fighter management led by Syed Mujtaba Ali.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--panel:#121212;--panel2:#1a1a1a;--line:#2a2a2a;--red:#d71920;--red2:#ff3b3b;--txt:#f4f4f4;--mut:#a3a3a3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark}}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 16px/1.6 Barlow,Arial,sans-serif}
+h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:0;line-height:1}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--red2);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+.btn{display:inline-block;font:700 14px 'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:13px 22px;border:1px solid #fff;background:transparent;color:#fff;cursor:pointer;transition:.2s}
+.btn:hover{background:#fff;color:#000}
+.btn.red{background:var(--red);border-color:var(--red)}
+.btn.red:hover{background:var(--red2);border-color:var(--red2);color:#fff}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.sec-h h2{font-size:clamp(30px,4vw,44px);font-weight:800}
+.sec-h small{color:var(--red2);font-weight:600}
+.sec-h a{color:var(--mut);font-size:14px}.sec-h a:hover{color:#fff}
+/* nav */
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,5,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font:800 28px 'Barlow Condensed',sans-serif;letter-spacing:.04em}.logo b{color:var(--red)}
+.links{display:flex;gap:26px;font-size:14px;font-weight:500}
+.links a{padding:6px 0;border-bottom:2px solid transparent;color:#ddd}.links a:hover{border-color:var(--red);color:#fff}
+.burger{display:none;background:none;border:1px solid var(--line);color:#fff;padding:8px 12px;cursor:pointer}
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 35%,#4a0a0d 0,#1a0405 35%,#050505 70%)}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 34px,rgba(255,255,255,.035) 34px 36px),repeating-linear-gradient(-45deg,transparent 0 34px,rgba(255,255,255,.035) 34px 36px);mask-image:linear-gradient(90deg,transparent 30%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;width:100%}
+.hero .tag{color:var(--red2);font-weight:600;letter-spacing:.06em}
+.hero h1{font-size:clamp(50px,8vw,104px);font-weight:800;margin:14px 0 20px}.hero h1 em{font-style:normal;color:var(--red2)}
+.hero p{max-width:520px;color:#ddd;font-size:18px;margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.stats{border-left:2px solid var(--red);padding-left:22px;display:grid;gap:22px;justify-self:end}
+.stats b{display:block;font:800 40px 'Barlow Condensed',sans-serif}.stats span{color:var(--mut);font-size:14px}
+.sample{display:inline-block;margin-top:22px;font-size:12px;color:var(--mut);border:1px dashed #555;padding:3px 9px}
+/* coach */
+.coach{background:var(--panel)}
+.coach .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center}
+.portrait{aspect-ratio:4/5;background:linear-gradient(180deg,#2b0709,#0b0b0b);border:1px solid var(--line);position:relative;overflow:hidden}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.portrait i{position:absolute;left:10px;bottom:10px;font-size:11px;color:var(--mut);font-style:normal;background:#000a;padding:2px 8px}
+.coach h2{font-size:clamp(34px,5vw,56px);font-weight:800;margin:6px 0 4px}
+.coach .role{color:var(--red2);font:700 20px 'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.coach p{color:#cfcfcf;max-width:560px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:22px 0}
+.cols h3{font-size:17px;letter-spacing:.08em;margin-bottom:10px;color:var(--mut)}
+.cols ul{list-style:none;margin:0;padding:0}.cols li{padding:6px 0;border-bottom:1px solid var(--line);font-size:15px}
+.cols li:before{content:"";display:inline-block;width:8px;height:8px;background:var(--red);margin-right:10px;transform:skew(-20deg)}
+.cols li small{float:right;color:var(--mut)}
+.soc{display:flex;gap:10px;margin-top:20px}.soc a{border:1px solid var(--line);padding:6px 14px;font-size:13px;color:var(--mut)}.soc a:hover{border-color:var(--red);color:#fff}
+/* fighters */
+.grid6{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);transition:.25s}
+.card:hover{border-color:var(--red);transform:translateY(-4px)}
+.card .ph{height:150px;background:linear-gradient(180deg,#3a0a0d,#101010);position:relative;overflow:hidden}
+.card .ph svg{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%}
+.card .in{padding:14px}
+.card h3{font-size:22px;font-weight:700}.card .nick{color:var(--mut);font-size:13px;font-style:italic}
+.card .meta{font-size:13px;color:var(--mut);margin-top:8px}
+.rec{font:800 24px 'Barlow Condensed',sans-serif;margin:2px 0}
+.st{font-size:12px;font-weight:600;color:#34d058}.st.up{color:#f0a020}
+.card .btn{display:block;text-align:center;margin-top:10px;padding:8px;font-size:12px;border-color:#555}
+/* fights */
+.fights{background:linear-gradient(110deg,#2a0508,#050505 55%);border-block:1px solid var(--line)}
+.main{display:grid;grid-template-columns:1.2fr 1fr;border:1px solid var(--line);background:#0b0b0b}
+.vs{padding:34px 26px;text-align:center;background:radial-gradient(circle at 50% 0,#4a0a0d,#0b0b0b 70%);position:relative}
+.vs .flag{position:absolute;top:0;left:0;background:var(--red);font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.08em;padding:4px 12px}
+.vs h3{font-size:clamp(28px,4vw,42px);font-weight:800;margin-top:18px}.vs h3 span{display:block;color:var(--red2);font-size:.6em;margin:6px 0}
+.vs p{margin:14px 0 0;color:var(--mut)}
+.info{padding:30px 26px}.info h3{font-size:26px}.info p{margin:8px 0;color:#ccc}
+.cd{display:flex;gap:10px;margin:18px 0}
+.cd div{flex:1;border:1px solid var(--line);text-align:center;padding:8px 0}.cd b{display:block;font:800 30px 'Barlow Condensed',sans-serif}.cd span{font-size:11px;color:var(--mut)}
+.list{margin-top:18px;border:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:center;font-size:15px}.row:last-child{border:0}
+.pill{font-size:12px;font-weight:600;padding:2px 10px;border:1px solid var(--red);color:var(--red2)}
+/* programs */
+.prog{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.prog .card{padding:20px}.prog h3{font-size:22px;margin-bottom:6px}.prog .lvl{color:var(--red2);font-size:13px;font-weight:600}.prog p{color:var(--mut);font-size:14px;margin:8px 0 14px}
+.prog .card .btn{display:inline-block;margin:0;padding:8px 16px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:10px}
+.gal div{background:linear-gradient(135deg,#2c0709,#101010);border:1px solid var(--line);display:flex;align-items:flex-end;padding:10px;font-size:13px;color:var(--mut);transition:.25s}
+.gal div:hover{border-color:var(--red);color:#fff}.gal .w{grid-column:span 2}.gal .t{grid-row:span 2}
+/* contact */
+.contact{background:var(--panel)}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+form{display:grid;gap:14px}
+label{font-size:13px;color:var(--mut);display:grid;gap:5px}
+input,select,textarea{background:#0a0a0a;border:1px solid var(--line);color:#fff;padding:12px;font:inherit}
+input:focus,select:focus,textarea:focus{border-color:var(--red);outline:0}
+.err{color:#ff6b6b;font-size:12px;min-height:0}
+.msg{padding:12px;border:1px solid #34d058;color:#34d058;display:none}
+footer{padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+@media(max-width:900px){
+.links{display:none;position:absolute;top:100%;left:0;right:0;background:#0a0a0a;flex-direction:column;padding:16px 22px;border-bottom:1px solid var(--line)}
+.links.open{display:flex}.burger{display:block}.nav-cta{display:none}
+.hero .wrap,.coach .wrap,.contact .wrap,.main{grid-template-columns:1fr}
+.stats{grid-template-columns:1fr 1fr;justify-self:start}
+.gal{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:no-preference){.hero .wrap>div:first-child{animation:in .9s ease both}@keyframes in{from{opacity:0;transform:translateY(18px)}}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Main">
+<a class="logo" href="#top">TITAN <b>MMA</b></a>
+<div class="links" id="links">
+<a href="#coach">About</a><a href="#fighters">Fighters</a><a href="#fights">Upcoming Fights</a><a href="#training">Training</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+</div>
+<a class="btn red nav-cta" href="#contact">Book a Session</a>
+<button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">Menu</button>
+</nav></div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+<div>
+<div class="tag">MMA Coach &amp; Fighter Management</div>
+<h1>Built through discipline. <em>Proven in combat.</em></h1>
+<p>Developing fighters. Building champions. Preparing athletes for the highest level of competition.</p>
+<div class="cta"><a class="btn red" href="#fighters">View Fighters</a><a class="btn" href="#fights">Upcoming Fights</a><a class="btn" href="#contact">Book a Training Session</a></div>
+<span class="sample">Sample numbers: replace with verified figures</span>
+</div>
+<div class="stats">
+<div><b>15+</b><span>Fighters coached</span></div>
+<div><b>50+</b><span>Athletes trained</span></div>
+<div><b>5</b><span>Championship titles</span></div>
+<div><b>8+</b><span>Years of experience</span></div>
+</div>
+</div></section>
+
+<section class="coach" id="coach"><div class="wrap">
+<div class="portrait"><svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle cx="100" cy="95" r="38" fill="#1c1c1c"/><path d="M20 250c0-70 35-100 80-100s80 30 80 100z" fill="#161616"/><path d="M62 82c4-32 72-32 76 0-20-14-56-14-76 0z" fill="#000"/></svg><i>Photo placeholder</i></div>
+<div>
+<div class="role">Head Coach &amp; Founder</div>
+<h2>Syed Mujtaba Ali</h2>
+<p>Coaching philosophy: discipline, technique and mental strength, inside and outside the cage. Replace this biography with the coach's own fighting background once verified.</p>
+<div class="cols">
+<div><h3>Specializations</h3><ul><li>MMA</li><li>Wrestling</li><li>Brazilian Jiu-Jitsu</li><li>Boxing</li><li>Muay Thai</li><li>Strength &amp; Conditioning</li></ul></div>
+<div><h3>Experience</h3><ul><li>Years of experience <small>8+</small></li><li>Fighters coached <small>15+</small></li><li>Championship titles <small>5+</small></li><li>Athletes trained <small>50+</small></li></ul>
+<div class="soc"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Facebook</a></div></div>
+</div>
+<a class="btn red" href="#contact">Coaching inquiry</a>
+</div></div></section>
+
+<section id="fighters"><div class="wrap">
+<div class="sec-h"><h2>Our Fighters <small>Team roster</small></h2><a href="#fighters">All fighters</a></div>
+<div class="grid6" id="roster"></div>
+<span class="sample">Sample roster: names and records are placeholders</span>
+</div></section>
+
+<section class="fights" id="fights"><div class="wrap">
+<div class="sec-h"><h2>Upcoming Fights</h2><a href="#fights">Full schedule</a></div>
+<div class="main">
+<div class="vs"><span class="flag">Main event</span><h3>Fighter A<span>VS</span>Fighter B</h3><p>Lightweight (155 lbs) | MMA</p></div>
+<div class="info"><h3>Sample Fight Night</h3><p>Date: 20 Dec 2026</p><p>Venue: To be announced</p><p>Time: 7:00 PM (local)</p>
+<div class="cd" id="cd" aria-live="off"><div><b>--</b><span>Days</span></div><div><b>--</b><span>Hours</span></div><div><b>--</b><span>Min</span></div><div><b>--</b><span>Sec</span></div></div>
+<a class="btn red" href="#contact">Event info</a></div>
+</div>
+<div class="list">
+<div class="row"><b>Fighter C vs Fighter D</b><span>Sample Event 2</span><span>15 Jan 2027</span><span class="pill">Upcoming</span></div>
+<div class="row"><b>Fighter E vs Fighter F</b><span>Sample Event 3</span><span>28 Feb 2027</span><span class="pill">Upcoming</span></div>
+</div>
+<span class="sample">Sample fights: no real bouts shown until added by admin</span>
+</div></section>
+
+<section id="training"><div class="wrap">
+<div class="sec-h"><h2>Training Programs <small>Get better every day</small></h2></div>
+<div class="prog" id="prog"></div>
+</div></section>
+
+<section id="gallery" style="padding-top:0"><div class="wrap">
+<div class="sec-h"><h2>Media Gallery <small>Training, fights, behind the scenes</small></h2><a href="#gallery">Full gallery</a></div>
+<div class="gal"><div class="w t">Fight night</div><div>Training</div><div>Walkout</div><div class="w">Behind the scenes</div><div>Sparring</div><div>Highlights (video)</div></div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+<div><h2 style="font-size:clamp(34px,5vw,52px);font-weight:800;margin-bottom:12px">Book a session</h2>
+<p style="color:var(--mut)">Training session or fighter management inquiry: send your details and we will reply.</p>
+<p style="color:var(--mut)">Gym address and WhatsApp number: add in admin settings.</p></div>
+<form id="f" novalidate>
+<label>Inquiry type<select name="t"><option>Training session</option><option>Fighter management</option></select></label>
+<label>Name<input name="n" autocomplete="name"><span class="err"></span></label>
+<label>Email<input name="e" type="email" autocomplete="email"><span class="err"></span></label>
+<label>Phone<input name="p" type="tel" autocomplete="tel"><span class="err"></span></label>
+<label>Message<textarea name="m" rows="4"></textarea><span class="err"></span></label>
+<button class="btn red" type="submit">Send inquiry</button>
+<div class="msg" id="ok" role="status">Inquiry sent. We will contact you soon.</div>
+</form></div></section>
+</main>
+<footer><div class="wrap"><span class="logo" style="font-size:22px">TITAN <b>MMA</b></span><span>Train hard. Fight smart. Become more.</span><span>© 2026 Titan MMA</span></div></footer>
+
+<script>
+const fighters=[["Fighter One","The Wolf","Lightweight (155 lbs)","12 - 3 - 0","Active"],["Fighter Two","The Silent","Welterweight (170 lbs)","10 - 2 - 0","Active"],["Fighter Three","The Destroyer","Featherweight (145 lbs)","8 - 1 - 0","Active"],["Fighter Four","The Phoenix","Bantamweight (135 lbs)","6 - 2 - 0","Upcoming fight"],["Fighter Five","The Hammer","Heavyweight (265 lbs)","7 - 4 - 0","Active"],["Fighter Six","The Future","Lightweight (155 lbs)","5 - 0 - 0","Active"]];
+document.getElementById('roster').innerHTML=fighters.map(f=>`<article class="card"><div class="ph"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="38" r="18" fill="#222"/><path d="M8 100c0-34 18-44 42-44s42 10 42 44z" fill="#1a1a1a"/></svg></div><div class="in"><h3>${f[0]}</h3><div class="nick">"${f[1]}"</div><div class="meta">${f[2]}</div><div class="rec">${f[3]}</div><div class="st ${f[4][0]=='U'?'up':''}">${f[4]}</div><a class="btn" href="#fighters">View profile</a></div></article>`).join('');
+const progs=[["MMA Fundamentals","All levels","2 days/week","Learn the basics and build a strong foundation."],["Advanced MMA","Intermediate+","4 days/week","Sharpen your game with advanced techniques."],["Wrestling & Grappling","All levels","3 days/week","Improve control, takedowns and ground game."],["Boxing & Striking","All levels","3 days/week","Build speed, power and precision."],["Competition Prep","Advanced","5 days/week","Get fight-ready with a structured plan."],["Personal Training","All levels","Flexible","One-on-one coaching for your goals."],["Strength & Conditioning","All levels","3 days/week","Build strength, endurance and mental toughness."]];
+document.getElementById('prog').innerHTML=progs.map(p=>`<article class="card"><h3>${p[0]}</h3><div class="lvl">${p[1]} · ${p[2]}</div><p>${p[3]}</p><a class="btn red" href="#contact">Book now</a></article>`).join('');
+// countdown (edit date here)
+const target=new Date('2026-12-20T19:00:00').getTime(),cd=document.querySelectorAll('#cd b');
+function tick(){let d=Math.max(0,target-Date.now()),v=[86400000,3600000,60000,1000].map((u,i)=>{const x=Math.floor(d/u);d-=x*u;return x});cd.forEach((el,i)=>el.textContent=String(v[i]).padStart(2,'0'))}
+tick();setInterval(tick,1000);
+// menu
+const b=document.getElementById('burger'),l=document.getElementById('links');
+b.onclick=()=>{const o=l.classList.toggle('open');b.setAttribute('aria-expanded',o)};
+l.addEventListener('click',()=>l.classList.remove('open'));
+// form validation
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();const f=e.target,ok=document.getElementById('ok');let good=true;
+const rules={n:v=>v.trim().length>1||'Enter your name.',e:v=>/^\S+@\S+\.\S+$/.test(v)||'Enter a valid email.',p:v=>/^[+\d\s-]{7,}$/.test(v)||'Enter a valid phone number.',m:v=>v.trim().length>9||'Message needs at least 10 characters.'};
+for(const k in rules){const r=rules[k](f[k].value),s=f[k].nextElementSibling;s.textContent=r===true?'':r;if(r!==true)good=false}
+ok.style.display=good?'block':'none';if(good)f.reset()});
+</script>
+</body>
+</html>
