@@ -803,10 +803,10 @@
                     <span class="sample">Sample numbers: replace with verified figures</span>
                 </div>
                 <div class="stats">
-                    <div><b>15+</b><span>Fighters coached</span></div>
-                    <div><b>50+</b><span>Athletes trained</span></div>
-                    <div><b>5</b><span>Championship titles</span></div>
-                    <div><b>8+</b><span>Years of experience</span></div>
+                    <div><b>100+</b><span>Fighters coached</span></div>
+                    <div><b>2+</b><span>MMA+2🏆🇵🇰</span></div>
+                    <div><b>3+</b><span>3+international🥇🇨🇷</span></div>
+                    <div><b>3+</b><span>3+Bjj Title🏆🇵🇰</span></div>
                 </div>
             </div>
         </section>
@@ -856,7 +856,7 @@
                     <h2>Our Fighters <small>Team roster</small></h2><a href="#fighters">All fighters</a>
                 </div>
                 <div class="grid6" id="roster"></div>
-                <span class="sample">Sample roster: names and records are placeholders</span>
+              
             </div>
         </section>
 
@@ -944,28 +944,32 @@
     </footer>
 
     <script>
-        const fighters = [["Fighter One", "The Wolf", "Lightweight (155 lbs)", "12 - 3 - 0", "Active"], ["Fighter Two", "The Silent", "Welterweight (170 lbs)", "10 - 2 - 0", "Active"], ["Fighter Three", "The Destroyer", "Featherweight (145 lbs)", "8 - 1 - 0", "Active"], ["Fighter Four", "The Phoenix", "Bantamweight (135 lbs)", "6 - 2 - 0", "Upcoming fight"], ["Fighter Five", "The Hammer", "Heavyweight (265 lbs)", "7 - 4 - 0", "Active"], ["Fighter Six", "The Future", "Lightweight (155 lbs)", "5 - 0 - 0", "Active"]];
-        document.getElementById('roster').innerHTML = fighters.map(f => `<article class="card"><div class="ph"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="38" r="18" fill="#222"/><path d="M8 100c0-34 18-44 42-44s42 10 42 44z" fill="#1a1a1a"/></svg></div><div class="in"><h3>${f[0]}</h3><div class="nick">"${f[1]}"</div><div class="meta">${f[2]}</div><div class="rec">${f[3]}</div><div class="st ${f[4][0] == 'U' ? 'up' : ''}">${f[4]}</div><a class="btn" href="#fighters">View profile</a></div></article>`).join('');
-        const progs = [["MMA Fundamentals", "All levels", "2 days/week", "Learn the basics and build a strong foundation."], ["Advanced MMA", "Intermediate+", "4 days/week", "Sharpen your game with advanced techniques."], ["Wrestling & Grappling", "All levels", "3 days/week", "Improve control, takedowns and ground game."], ["Boxing & Striking", "All levels", "3 days/week", "Build speed, power and precision."], ["Competition Prep", "Advanced", "5 days/week", "Get fight-ready with a structured plan."], ["Personal Training", "All levels", "Flexible", "One-on-one coaching for your goals."], ["Strength & Conditioning", "All levels", "3 days/week", "Build strength, endurance and mental toughness."]];
-        document.getElementById('prog').innerHTML = progs.map(p => `<article class="card"><h3>${p[0]}</h3><div class="lvl">${p[1]} · ${p[2]}</div><p>${p[3]}</p><a class="btn red" href="#contact">Book now</a></article>`).join('');
-        // countdown (edit date here)
-        const target = new Date('2026-12-20T19:00:00').getTime(), cd = document.querySelectorAll('#cd b');
-        function tick() { let d = Math.max(0, target - Date.now()), v = [86400000, 3600000, 60000, 1000].map((u, i) => { const x = Math.floor(d / u); d -= x * u; return x }); cd.forEach((el, i) => el.textContent = String(v[i]).padStart(2, '0')) }
-        tick(); setInterval(tick, 1000);
-        // menu
-        const b = document.getElementById('burger'), l = document.getElementById('links');
-        b.onclick = () => { const o = l.classList.toggle('open'); b.setAttribute('aria-expanded', o) };
-        l.addEventListener('click', () => l.classList.remove('open'));
-        // form validation
-        document.getElementById('f').addEventListener('submit', e => {
-            e.preventDefault(); const f = e.target, ok = document.getElementById('ok'); let good = true;
-            const rules = { n: v => v.trim().length > 1 || 'Enter your name.', e: v => /^\S+@\S+\.\S+$/.test(v) || 'Enter a valid email.', p: v => /^[+\d\s-]{7,}$/.test(v) || 'Enter a valid phone number.', m: v => v.trim().length > 9 || 'Message needs at least 10 characters.' };
-            for (const k in rules) { const r = rules[k](f[k].value), s = f[k].nextElementSibling; s.textContent = r === true ? '' : r; if (r !== true) good = false }
-            ok.style.display = good ? 'block' : 'none'; if (good) f.reset()
-        });
+       
 
 
-        
+const fighters = [
+    ["Fighter One", "Muhammad Kashif", "", "4 - 0 - 0", "Active", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792732636/Screenshot_2026-10-23_101440_copy_lidv8i.jpg"],
+    ["Fighter Two", "Waji Ul Hassan", "", "2 - 1 - 0", "Active", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792732821/IMG_5238_blcgb2.jpg"],
+    ["Fighter Three", "Ali Raza", "60KG", "3 - 0 - 0", "Active", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792733003/Screenshot_2026-10-23_102302_nlsqcu.png"],
+    ["Fighter Four", "Umar Tanoli", "-52KG", "3 - 1 - 0", "Active", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792733169/Screenshot_2026-10-23_102600_yu66rr.png"],
+    ["Fighter Five", "Huzaifa Shah", "70KG", "2 - 1 - 0", "Active", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792733291/Screenshot_2026-10-23_102757_s7pizn.png"],
+   ];
+
+document.getElementById('roster').innerHTML = fighters.map(f => `
+    <article class="card">
+        <div class="ph" style="height: 180px; overflow: hidden;">
+            <img src="${f[5]}" alt="${f[0]}" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="in">
+            <h3>${f[0]}</h3>
+            <div class="nick">"${f[1]}"</div>
+            <div class="meta">${f[2]}</div>
+            <div class="rec">${f[3]}</div>
+            <div class="st ${f[4][0]=='U'?'up':''}">${f[4]}</div>
+            <a class="btn" href="#fighters">View profile</a>
+        </div>
+    </article>
+`).join('');
     </script>
 </body>
 
