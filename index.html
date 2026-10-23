@@ -800,7 +800,7 @@
                     <div class="cta"><a class="btn red" href="#fighters">View Fighters</a><a class="btn"
                             href="#fights">Upcoming Fights</a><a class="btn" href="#contact">Book a Training Session</a>
                     </div>
-                    <span class="sample">Sample numbers: replace with verified figures</span>
+                 
                 </div>
                 <div class="stats">
                     <div><b>100+</b><span>Fighters coached</span></div>
@@ -860,40 +860,46 @@
             </div>
         </section>
 
-        <section class="fights" id="fights">
-            <div class="wrap">
-                <div class="sec-h">
-                    <h2>Upcoming Fights</h2><a href="#fights">Full schedule</a>
-                </div>
-                <div class="main">
-                    <div class="vs"><span class="flag">Main event</span>
-                        <h3>Fighter A<span>VS</span>Fighter B</h3>
-                        <p>Lightweight (155 lbs) | MMA</p>
-                    </div>
-                    <div class="info">
-                        <h3>Sample Fight Night</h3>
-                        <p>Date: 20 Dec 2026</p>
-                        <p>Venue: To be announced</p>
-                        <p>Time: 7:00 PM (local)</p>
-                        <div class="cd" id="cd" aria-live="off">
-                            <div><b>--</b><span>Days</span></div>
-                            <div><b>--</b><span>Hours</span></div>
-                            <div><b>--</b><span>Min</span></div>
-                            <div><b>--</b><span>Sec</span></div>
-                        </div>
-                        <a class="btn red" href="#contact">Event info</a>
-                    </div>
-                </div>
-                <div class="list">
-                    <div class="row"><b>Fighter C vs Fighter D</b><span>Sample Event 2</span><span>15 Jan
-                            2027</span><span class="pill">Upcoming</span></div>
-                    <div class="row"><b>Fighter E vs Fighter F</b><span>Sample Event 3</span><span>28 Feb
-                            2027</span><span class="pill">Upcoming</span></div>
-                </div>
-                <span class="sample">Sample fights: no real bouts shown until added by admin</span>
+<section class="fights" id="fights">
+    <div class="wrap">
+        <div class="sec-h">
+            <h2>Upcoming &amp; Past Fights</h2><a href="#fights">Full schedule</a>
+        </div>
+        
+        <!-- Upcoming Fight (Already jo hai) -->
+        <div class="main">
+            <div class="vs"><span class="flag">Main event</span>
+                <h3>Fighter A<span>VS</span>Fighter B</h3>
+                <p>Lightweight (155 lbs) | MMA</p>
             </div>
-        </section>
+            <div class="info">
+                <h3>Sample Fight Night</h3>
+                <p>Date: 20 Dec 2026</p>
+                <p>Venue: To be announced</p>
+                <p>Time: 7:00 PM (local)</p>
+                <div class="cd" id="cd" aria-live="off">
+                    <div><b>--</b><span>Days</span></div>
+                    <div><b>--</b><span>Hours</span></div>
+                    <div><b>--</b><span>Min</span></div>
+                    <div><b>--</b><span>Sec</span></div>
+                </div>
+                <a class="btn red" href="#contact">Event info</a>
+            </div>
+        </div>
 
+        <!-- PAST FIGHTS / POSTERS SECTION -->
+        <div style="margin-top: 40px;">
+            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--txt);">Completed Fights &amp; Event Posters</h3>
+            <div class="prog" id="past-fights-grid"></div>
+        </div>
+
+        <div class="list" style="margin-top: 20px;">
+            <div class="row"><b>Fighter C vs Fighter D</b><span>Sample Event 2</span><span>15 Jan 2027</span><span class="pill">Upcoming</span></div>
+            <div class="row"><b>Fighter E vs Fighter F</b><span>Sample Event 3</span><span>28 Feb 2027</span><span class="pill">Upcoming</span></div>
+        </div>
+        
+    </div>
+</section>
         <section id="training">
             <div class="wrap">
                 <div class="sec-h">
@@ -903,17 +909,16 @@
             </div>
         </section>
 
-        <section id="gallery" style="padding-top:0">
-            <div class="wrap">
-                <div class="sec-h">
-           <div class="gal">
-    <img src="https://res.cloudinary.com/ddviuaaca/image/upload/v1792731464/pic2_gargpj.png" alt="Fight night" class="w t" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
-    <img src="https://res.cloudinary.com/ddviuaaca/image/upload/v1792731491/pic5_fovfjv.png" alt="Training" style="width: 100%; height: 200%; object-fit: cover; border-radius: 4px;">
-    <img src="https://res.cloudinary.com/ddviuaaca/image/upload/v1792731497/pic4_hze1jz.png" alt="Walkout" style="width: 100%; height: 200%; object-fit: cover; border-radius: 4px;">
-
-</div>
-            </div>
-        </section>
+       <section id="gallery" style="padding-top:0">
+    <div class="wrap">
+        <div class="sec-h">
+            <h2>Media Gallery <small>Training, fights, behind the scenes</small></h2>
+            <a href="#gallery">Full gallery</a>
+        </div>
+        <div class="gal" id="gallery-grid"></div>
+    </div>
+</section>
+           
 
         <section class="contact" id="contact">
             <div class="wrap">
@@ -939,8 +944,8 @@
         </section>
     </main>
     <footer>
-        <div class="wrap"><span class="logo" style="font-size:22px">TITAN <b>MMA</b></span><span>Train hard. Fight
-                smart. Become more.</span><span>© 2026 Titan MMA</span></div>
+        <div class="wrap"><span class="logo" style="font-size:22px">AMANULLAH MEMON <b>MMA</b></span><span>Train hard. Fight
+                smart. Become more.</span><span>© 2026 AMANULLAH MEMON</span></div>
     </footer>
 
     <script>
@@ -970,6 +975,47 @@ document.getElementById('roster').innerHTML = fighters.map(f => `
         </div>
     </article>
 `).join('');
+
+
+const galleryImages = [
+    ["https://res.cloudinary.com/ddviuaaca/image/upload/v1792731464/pic2_gargpj.png", "Fight night", "w t"],
+    ["https://res.cloudinary.com/ddviuaaca/image/upload/v1792731491/pic5_fovfjv.png", "Training", ""],
+    ["https://res.cloudinary.com/ddviuaaca/image/upload/v1792731497/pic4_hze1jz.png", "Walkout", ""],
+    ["https://images.unsplash.com/photo-1550259979-ed79b48d2a30", "Sparring", ""],
+    ["https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2", "Highlights (video)", "w"]
+];
+
+document.getElementById('gallery-grid').innerHTML = galleryImages.map(g => `
+    <div class="${g[2]}" style="position: relative; overflow: hidden; padding: 0;">
+        <img src="${g[0]}" alt="${g[1]}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <span style="position: absolute; left: 10px; bottom: 10px; font-size: 11px; color: #fff; background: rgba(0,0,0,0.7); padding: 2px 8px; border-radius: 2px;">${g[1]}</span>
+    </div>
+`).join('');
+
+
+// Past Fights / Event Posters Array [Event Title, Fighters/Details, Date, Poster Image URL]
+const pastFights = [
+    ["Championship", "AMANULLAH MEMON vs ATIF KHAN", "14 Aug ", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792749112/fight1_p77byc.png"],
+    ["FLYWEIGHT MMA BOUT", "AMANULLAH MEMON vs SEYED ALI", "19 Aug 2023", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792749159/pic10_dayhqx.png"],
+    ["Asian Championship", "", "2 sEP 2017", "https://res.cloudinary.com/ddviuaaca/image/upload/v1792749211/pic11_rympm2.png"]
+];
+
+const pastFightsContainer = document.getElementById('past-fights-grid');
+if(pastFightsContainer) {
+    pastFightsContainer.innerHTML = pastFights.map(pf => `
+        <article class="card">
+            <div class="ph" style="height: 220px; overflow: hidden;">
+                <img src="${pf[3]}" alt="${pf[0]}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="in">
+                <h3>${pf[0]}</h3>
+                <div class="meta" style="margin-top: 4px; color: var(--red2);">${pf[1]}</div>
+                <div class="meta" style="margin-top: 6px;">Date: ${pf[2]}</div>
+                <span class="pill" style="display: inline-block; margin-top: 10px;">Completed</span>
+            </div>
+        </article>
+    `).join('');
+}
     </script>
 </body>
 
